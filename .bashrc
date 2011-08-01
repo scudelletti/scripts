@@ -104,7 +104,7 @@ fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
-#Deixa o usuario azul, versao do Ruby amarela, Diretorio roxo e Git
+#Deixa o usuario azul, versao do Ruby amarela, Diretorio roxo e Git vermelho
 PS1='\[\033[34m\]\u \[\033[1;33m\]`~/.rvm/bin/rvm-prompt i v \[\033[35m\]\ \w
 `\[\033[0;31m\] `git branch 2> /dev/null | grep -e ^* | sed -E s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /
 `\[\033[37m\]$\[\033[00m\] '
