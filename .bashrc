@@ -3,8 +3,7 @@
 # for examples
 
 # If not running interactively, don't do anything
-#[ -z "$PS1" ] && return
-if [[ -n "$PS1" ]] ; then
+[ -z "$PS1" ] && return
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -103,15 +102,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-#Complete IRB
-	alias irb='irb --readline -r irb/completion'
-#Fim Complete IRB
-
-[[ -s "/home/mandrake/.rvm/scripts/rvm" ]] && source "/home/mandrake/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 #Deixa o usuario azul, versao do Ruby amarela, Diretorio roxo e Git
 PS1='\[\033[34m\]\u \[\033[1;33m\]`~/.rvm/bin/rvm-prompt i v \[\033[35m\]\ \w
 `\[\033[0;31m\] `git branch 2> /dev/null | grep -e ^* | sed -E s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /
 `\[\033[37m\]$\[\033[00m\] '
 
-fi
