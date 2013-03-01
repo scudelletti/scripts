@@ -1,2 +1,2 @@
-#VirtualBox Extension Instaldo, autenticação Extended para Login ou Null sem autenticação
+#VirtualBox Extension Instalado, autenticacao Extended para Login ou Null sem autenticacao
 vboxheadless -startvm "WinXP" -e "TCP/Ports=3333"
