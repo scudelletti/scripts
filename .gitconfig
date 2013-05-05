@@ -1,0 +1,37 @@
+[user]
+  name = Diogo Scudelletti
+  email = diogo@scudelletti.com
+ 
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = true
+ 
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+ 
+[color "diff"]
+  commit = yellow
+ 
+[core]
+  editor = sublime -w
+  excludesfile = ~/.gitignore
+ 
+[push]
+  default = current
+ 
+[alias]
+  st = status
+  ci = commit
+  br = branch 
+  co = checkout
+  df = diff
+  dc = diff --cached
+  lg = log
+ 
+  # Show files ignored by git:
+  ign = ls-files -o -i --exclude-standard

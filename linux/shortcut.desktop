@@ -1,0 +1,16 @@
+#Edit and Drag this file to Unity Panel for create a Shortcut.
+[Desktop Entry]                                                                                                                                                                
+#Save file in this local /usr/share/applications/sublime.desktop
+Version=2.0
+Name=Sublime Text 2 
+Exec=sublime
+Terminal=false
+Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
+Type=Application
+Categories=TextEditor;IDE;Development
+X-Ayatana-Desktop-Shortcuts=NewWindow
+ 
+[NewWindow Shortcut Group]
+Name=New Window
+Exec=sublime -n
+TargetEnvironment=Unity
