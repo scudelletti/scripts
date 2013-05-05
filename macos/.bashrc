@@ -26,12 +26,7 @@ CYAN="\[\033[0;36m\]"
 RED="\[\033[0;31m\]"
 PURPLE="\[\033[0;35m\]"
 BROWN="\[\033[0;33m\]"
-BLUE="\[\033[0;34m\]"
 YELLOW="\[\033[0;33m\]"
-GREEN="\[\033[0;32m\]"
-CYAN="\[\033[0;36m\]"
-RED="\[\033[0;31m\]"
-BROWN="\[\033[0;33m\]"
  
 # RVM Function to show the version used in PS1
 RVM="\$(~/.rvm/bin/rvm-prompt)"
