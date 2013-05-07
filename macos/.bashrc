@@ -31,8 +31,8 @@ YELLOW="\[\033[0;33m\]"
 # RVM Function to show the version used in PS1
 RVM="\$(~/.rvm/bin/rvm-prompt)"
  
-# PS1 Configuration with GIT and RVM
-PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM] $RED\$(__git_ps1 ' [%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
+# PS1 Configuration with GIT, RVM and AWS Env
+PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]  $PURPLE\$(__aws_env)  $RED\$(__git_ps1 '[%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
  
 # Aliases
 alias ll="ls -la"
@@ -51,14 +51,26 @@ DEV_AWS_SECRET_ACCESS_KEY=BBBB
 PROD_AWS_ACCESS_KEY_ID=CCCC
 PROD_AWS_SECRET_ACCESS_KEY=DDDD
  
-function export_aws_for() {
+# Function to set AWS ambient variables
+function aws_for() {
   if [[ $1 = 'prod' ]]; then
     echo 'Exporting AWS variables for Prod environment'
+    export AWS_ENV='prod'
     export AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID
     export AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY
   else
     echo 'Exporting AWS variables for Dev environment'
+    export AWS_ENV='dev'
     export AWS_ACCESS_KEY_ID=$DEV_AWS_ACCESS_KEY_ID
     export AWS_SECRET_ACCESS_KEY=$DEV_AWS_SECRET_ACCESS_KEY
+  fi
+}
+
+# Function used on PS1
+__aws_env() {
+  if [ $AWS_ENV ]; then
+    echo "[aws:$AWS_ENV]"
+  else
+    echo ""
   fi
 }
