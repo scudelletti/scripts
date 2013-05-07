@@ -32,7 +32,7 @@ YELLOW="\[\033[0;33m\]"
 RVM="\$(~/.rvm/bin/rvm-prompt)"
  
 # PS1 Configuration with GIT, RVM and AWS Env
-PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]  $PURPLE\$(__aws_env)  $RED\$(__git_ps1 '[%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
+PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]$PURPLE\$(__aws_env) $RED\$(__git_ps1 ' [%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
  
 # Aliases
 alias ll="ls -la"
@@ -69,7 +69,7 @@ function aws_for() {
 # Function used on PS1
 __aws_env() {
   if [ $AWS_ENV ]; then
-    echo "[aws:$AWS_ENV]"
+    echo "  [aws:$AWS_ENV]"
   else
     echo ""
   fi
