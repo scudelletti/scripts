@@ -33,6 +33,9 @@ RVM="\$(~/.rvm/bin/rvm-prompt)"
  
 # PS1 Configuration with GIT, RVM and AWS Env
 PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]$PURPLE\$(__aws_env) $RED\$(__git_ps1 ' [%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
+
+# Tmux save the path each time the shell prompt is displayed - For Tmux-Powerline
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
  
 # Aliases
 alias ll="ls -la"
