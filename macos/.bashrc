@@ -77,3 +77,14 @@ __aws_env() {
     echo ""
   fi
 }
+
+# Put all brew binaries on $PATH
+for i in $(find /usr/local/Cellar -name bin)
+do
+  PATH=$i:$PATH
+done
+
+# Add Bash Completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
