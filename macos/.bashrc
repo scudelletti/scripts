@@ -38,6 +38,7 @@ PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]$PURPLE\$(__aws_env) $RED\$(__git_p
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
  
 # Aliases
+alias got="git"
 alias ll="ls -la"
 alias be="bundle exec"
 alias ebashrc="sublime ~/.bashrc"
