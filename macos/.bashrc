@@ -79,8 +79,8 @@ __aws_env() {
   fi
 }
 
-# Add /usr/sbin to $PATH
-PATH=/usb/sbin:$PATH
+# Add /usr/local/sbin to $PATH
+PATH=/usr/local/sbin:$PATH
 
 # Put all brew binaries on $PATH
 for i in $(find /usr/local/Cellar -name bin)
