@@ -21,6 +21,9 @@
   editor = sublime -w
   excludesfile = ~/.gitignore
 
+[help]
+  autocorrect = 1
+
 [push]
   default = current
 
