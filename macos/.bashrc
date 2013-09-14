@@ -80,14 +80,17 @@ __aws_env() {
   fi
 }
 
-# Add /usr/local/sbin to $PATH
-PATH=/usr/local/sbin:$PATH
+# Add the Brew Binaries on $PATH variable
+function load_brew(){
+  # Add /usr/local/sbin on $PATH
+  PATH=/usr/local/sbin:$PATH
 
-# Put all brew binaries on $PATH
-for i in $(find /usr/local/Cellar -name bin)
-do
-  PATH=$i:$PATH
-done
+  # Put all brew binaries on $PATH
+  for i in $(find /usr/local/Cellar -name bin)
+  do
+    PATH=$i:$PATH
+  done
+}
 
 # Add Bash Completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
