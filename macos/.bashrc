@@ -80,6 +80,10 @@ __aws_env() {
   fi
 }
 
+function my_ip(){
+  curl http://curlmyip.com
+}
+
 # Add the Brew Binaries on $PATH variable
 function load_brew(){
   # Add /usr/local/sbin on $PATH
