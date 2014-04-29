@@ -58,6 +58,10 @@ DEV_AWS_SECRET_ACCESS_KEY=BBBB
 PROD_AWS_ACCESS_KEY_ID=CCCC
 PROD_AWS_SECRET_ACCESS_KEY=DDDD
 
+# AWS Command Line Tool
+AWS_AUTO_SCALING_HOME="/usr/local/Cellar/auto-scaling/1.0.61.4/libexec"
+export JAVA_HOME="$(/usr/libexec/java_home)"
+
 # Function to set AWS ambient variables
 function aws_for() {
   if [[ $1 = 'prod' ]]; then
