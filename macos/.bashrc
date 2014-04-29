@@ -42,6 +42,8 @@ alias got="git"
 alias ll="ls -la"
 alias be="bundle exec"
 alias ebashrc="sublime ~/.bashrc"
+alias ehosts="sudo subl /etc/hosts"
+alias psg="ps aux | grep "
 #alias run-spec="cd ~/projects/some_project/ && pwd && echo Running All Tests on Some Project && rake spec:all"
 
 # Folder's aliases
