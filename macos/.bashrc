@@ -14,6 +14,9 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 
+# Ambient Variable to GPG
+export GPG_TTY=`tty`
+
 # Setting the color on variables
 NO_COLOUR="\[\033[0m\]"
 BLACK="\[\033[0;30m\]"
@@ -44,6 +47,7 @@ alias be="bundle exec"
 alias ebashrc="sublime ~/.bashrc"
 alias ehosts="sudo subl /etc/hosts"
 alias psg="ps aux | grep "
+
 #alias run-spec="cd ~/projects/some_project/ && pwd && echo Running All Tests on Some Project && rake spec:all"
 
 # Folder's aliases
