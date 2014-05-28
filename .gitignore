@@ -17,3 +17,6 @@ FLOOBITS_README.md
 # Ruby Stuff
 .ruby-version
 .ruby-gemset
+
+# Emacs Stuff
+.projectile
