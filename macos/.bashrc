@@ -44,6 +44,7 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -
 alias got="git"
 alias ll="ls -la"
 alias be="bundle exec"
+alias bi="bundle check || bundle install"
 alias ebashrc="sublime ~/.bashrc"
 alias ehosts="sudo subl /etc/hosts"
 alias psg="ps aux | grep "
@@ -52,6 +53,7 @@ alias psg="ps aux | grep "
 
 # Folder's aliases
 alias projects="cd ~/projects"
+alias abr="cd ~/projects/abril"
 
 # Amazon Variables
 # Dev

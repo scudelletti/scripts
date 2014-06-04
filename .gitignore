@@ -3,20 +3,14 @@
 
 # Sublime
 .tags
+.gemtags
 .tags_sorted_by_file
-.floo
-.sublime-project
-FLOOBITS_README.md
 
 # Intellij
 .idea/
 *.iml
 *.iws
 .rakeTasks
-
-# Ruby Stuff
-.ruby-version
-.ruby-gemset
 
 # Emacs Stuff
 .projectile
