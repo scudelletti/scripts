@@ -55,6 +55,9 @@ alias psg="ps aux | grep "
 alias projects="cd ~/projects"
 alias abr="cd ~/projects/abril"
 
+# Add Default Editor
+EDITOR='subl'
+
 # Amazon Variables
 # Dev
 DEV_AWS_ACCESS_KEY_ID=AAAA
