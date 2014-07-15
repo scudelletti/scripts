@@ -2,11 +2,16 @@
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 source ~/.rvm/scripts/rvm
 
-# Git Configuration
-# enable the git bash completion commands
-source /usr/local/etc/bash_completion.d/git-completion.bash
-# enable the git functions to PS1
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+
+if [ -n "$BASH_VERSION" ]; then
+  # Git Configuration
+  # enable the git bash completion commands
+  source /usr/local/etc/bash_completion.d/git-completion.bash
+
+  # enable the git functions to PS1
+  source /usr/local/etc/bash_completion.d/git-prompt.sh
+fi
+
 
 # Ambient Variables to git PS1
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -34,8 +39,10 @@ YELLOW="\[\033[0;33m\]"
 # RVM Function to show the version used in PS1
 RVM="\$(~/.rvm/bin/rvm-prompt)"
 
-# PS1 Configuration with GIT, RVM and AWS Env
-PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]$PURPLE\$(__aws_env) $RED\$(__git_ps1 ' [%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
+if [ -n "$BASH_VERSION" ]; then
+  # PS1 Configuration with GIT, RVM and AWS Env
+  PS1="$LIGHT_GRAY[\h] $NO_COLOUR $YELLOW[$RVM]$PURPLE\$(__aws_env) $RED\$(__git_ps1 ' [%s]')\n$LIGHT_BLUE\u $CYAN\w$NO_COLOUR \$ "
+fi
 
 # Tmux save the path each time the shell prompt is displayed - For Tmux-Powerline
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
