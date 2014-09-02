@@ -1,4 +1,4 @@
-<!-- Copy this file for /Users/<username>/Library/Application Support/Sublime Text 3/Packages/pry.sublime-snippet -->
+<!-- Copy this file to /Users/<username>/Library/Application Support/Sublime Text 3/Packages/pry.sublime-snippet -->
 <snippet>
 	<content><![CDATA[
 require 'pry'; binding.pry;
