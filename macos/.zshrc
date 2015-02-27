@@ -80,12 +80,13 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Aliases
+alias tmuxa="tmux a || tmux"
 alias got="git"
 alias ll="ls -la"
 alias be="bundle exec"
 alias bi="bundle check || bundle install"
-alias ebashrc="sublime ~/.bashrc"
-alias ezshrc="sublime ~/.zshrc"
+alias ebashrc="subl ~/.bashrc"
+alias ezshrc="subl ~/.zshrc"
 alias ehosts="sudo subl /etc/hosts"
 alias psg="ps aux | grep "
 
@@ -94,3 +95,20 @@ alias projects="cd ~/projects"
 alias abr="cd ~/projects/abril"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Personal Functions
+function some-company() {
+  case "$1" in
+  'a')
+    cd /Users/scudelletti/projects/some-company
+  ;;
+  'f')
+    cd /Users/scudelletti/projects/some-company/some-folder
+  ;;
+  'help')
+    echo "some-company help Show this help info"
+    echo "some-company      Go to some-company folder"
+    echo "some-company f    Go to some-company/some-folder folder"
+  ;;
+  esac
+}
