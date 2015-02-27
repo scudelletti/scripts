@@ -1,12 +1,13 @@
 {
-  "open_files_in_new_window": false,
-  "margin": 2,
-  "tab_size": 2,
-  "translate_tabs_to_spaces": true,
-  "highlight_line": true,
-  "show_full_path": true,
-  "ignored_packages":
-  [
-    "Vintage"
-  ]
+	"font_size": 19,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"margin": 2,
+	"open_files_in_new_window": false,
+	"show_full_path": true,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true
 }
