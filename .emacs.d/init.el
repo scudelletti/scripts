@@ -159,6 +159,14 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FIPLR - Fuzzy Find in Project Package                            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-set-key (kbd "C-c C-f") 'fiplr-find-file)
+(global-set-key (kbd "C-c C-d") 'fiplr-find-directory)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HideShow Minor Mode - Activate for all languages                 ;;
 ;;                                                                  ;;
 ;; HideShow hides and shows blocks of text                          ;;
