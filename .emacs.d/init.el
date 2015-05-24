@@ -28,16 +28,46 @@
 ;; Copy and Paste Tricks for OSX                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
+(defun isolate-kill-ring()
+  "Isolate Emacs kill ring from OS X system pasteboard.
+This function is only necessary in window system."
+  (interactive)
+  (setq interprogram-cut-function nil)
+  (setq interprogram-paste-function nil))
 
-(defun paste-to-osx (text &optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-(setq interprogram-cut-function 'paste-to-osx)
-(setq interprogram-paste-function 'copy-from-osx)
+(defun pasteboard-copy()
+  "Copy region to OS X system pasteboard."
+  (interactive)
+  (shell-command-on-region
+   (region-beginning) (region-end) "pbcopy"))
+
+(defun pasteboard-paste()
+  "Paste from OS X system pasteboard via `pbpaste' to point."
+  (interactive)
+  (shell-command-on-region
+   (point) (if mark-active (mark) (point)) "pbpaste" nil t))
+
+(defun pasteboard-cut()
+  "Cut region and put on OS X system pasteboard."
+  (interactive)
+  (pasteboard-copy)
+  (delete-region (region-beginning) (region-end)))
+
+(if window-system
+    (progn
+      (isolate-kill-ring)
+      ;; bind CMD+C to pasteboard-copy
+      (global-set-key (kbd "s-c") 'pasteboard-copy)
+      ;; bind CMD+V to pasteboard-paste
+      (global-set-key (kbd "s-v") 'pasteboard-paste)
+      ;; bind CMD+X to pasteboard-cut
+      (global-set-key (kbd "s-x") 'pasteboard-cut))
+
+  ;; you might also want to assign some keybindings for non-window
+  ;; system usage (i.e., in your text terminal, where the
+  ;; command->super does not work)
+  )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fullscreen on Startup                                            ;;
