@@ -92,7 +92,6 @@ alias psg="ps aux | grep "
 
 # Folder's aliases
 alias projects="cd ~/projects"
-alias abr="cd ~/projects/abril"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
