@@ -35,6 +35,7 @@ This function is only necessary in window system."
   (setq interprogram-cut-function nil)
   (setq interprogram-paste-function nil))
 
+
 (defun pasteboard-copy()
   "Copy region to OS X system pasteboard."
   (interactive)
@@ -206,6 +207,9 @@ This function is only necessary in window system."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (load-theme 'monokai t)
+
+;; Set Region Background Color
+(set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
