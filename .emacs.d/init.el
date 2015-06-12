@@ -209,7 +209,7 @@ This function is only necessary in window system."
 (load-theme 'monokai t)
 
 ;; Set Region Background Color
-(set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+(set-face-attribute 'region nil :background "#666")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
