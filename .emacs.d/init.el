@@ -170,10 +170,12 @@ This function is only necessary in window system."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(grep-highlight-matches (quote auto))
  '(ido-enable-flex-matching t)
  '(ido-mode (quote both) nil (ido))
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(js-indent-level 2)
+ '(list-matching-lines-default-context-lines 1)
  '(magit-diff-use-overlays nil)
  '(ruby-align-to-stmt-keywords t)
  '(standard-indent 2))
