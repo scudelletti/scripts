@@ -81,8 +81,10 @@ This function is only necessary in window system."
 ;;  Backup files directory                                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq backup-directory-alist (quote ((".*" . "~/.emacs_backups/"))))
-
+(setq backup-directory-alist
+      `((".*" . ,"~/.emacs_backups/")))
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/.emacs_backups/" t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Disable Dialog Box                                               ;;
@@ -141,6 +143,14 @@ This function is only necessary in window system."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq ruby-insert-encoding-magic-comment nil)
+
+(eval-after-load "hideshow"
+  '(add-to-list 'hs-special-modes-alist
+                `(ruby-mode
+                  ,(rx (or "def" "class" "module" "{" "["))
+                  ,(rx (or "}" "]" "end"))
+                  ,(rx (or "#" "=begin"))
+                  ruby-forward-sexp nil)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -252,26 +262,44 @@ This function is only necessary in window system."
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Improve Garbage Collector                                        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq gc-cons-threshold 20000000)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Start Emacs Server                                               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(server-start)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IDO and FLX-IDO                                                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'flx-ido)
+(flx-ido-mode)
+
 (require 'ido-vertical-mode)
 (ido-mode 1)
 (ido-vertical-mode 1)
-
-(require 'flx-ido)
 (ido-everywhere 1)
 (flx-ido-mode 1)
 ;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile                                                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (projectile-global-mode)
+(setq projectile-enable-caching t)
 (setq projectile-indexing-method 'native)
 
 
