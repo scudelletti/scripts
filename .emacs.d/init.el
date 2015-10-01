@@ -300,7 +300,6 @@ This function is only necessary in window system."
 
 (projectile-global-mode)
 (setq projectile-enable-caching t)
-(setq projectile-indexing-method 'native)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
