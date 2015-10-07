@@ -35,6 +35,10 @@ brew install --with-cocoa --srgb emacs
 cd ~/
 ln -s /Users/scudelletti/projects/scripts/.emacs.d
 
+# Sublime Text 3
+brew cask install sublime-text3
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+
 # Oh-My-ZSH
 brew install zsh
 chsh -s /bin/zsh
@@ -49,7 +53,6 @@ git fetch personal
 # Apps
 brew install caskroom/cask/brew-cask
 brew cask install google-chrome
-brew cask install sublime-text3
 brew cask install iterm2
 brew cask install sourcetree
 brew cask install virtualbox
