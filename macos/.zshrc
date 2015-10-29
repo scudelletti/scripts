@@ -93,7 +93,9 @@ alias psg="ps aux | grep "
 # Folder's aliases
 alias projects="cd ~/projects"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# RVM Configuration
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+source ~/.rvm/scripts/rvm
 
 # Personal Functions
 function some-company() {
