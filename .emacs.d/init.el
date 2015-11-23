@@ -69,6 +69,39 @@ This function is only necessary in window system."
   ;; command->super does not work)
   )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Install Packages                                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar my-packages '(
+  browse-kill-ring
+  cider
+  clojure-mode
+  coffee-mode
+  company
+  haml-mode
+  ido-vertical-mode
+  magit
+  monokai-theme
+  multiple-cursors
+  projectile
+  sass-mode
+  undo-tree
+  vline
+  web-mode
+  ag
+  wgrep
+  wgrep-ag
+  yaml-mode
+  yasnippet))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Remove Start-Up Screen                                           ;;
