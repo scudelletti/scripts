@@ -82,6 +82,7 @@ This function is only necessary in window system."
   clojure-mode
   coffee-mode
   company
+  flx-ido
   haml-mode
   ido-vertical-mode
   magit
