@@ -94,6 +94,8 @@ This function is only necessary in window system."
   vline
   web-mode
   ag
+  helm-ag
+  exec-path-from-shell
   wgrep
   wgrep-ag
   yaml-mode
@@ -102,6 +104,14 @@ This function is only necessary in window system."
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Load Env Variables                                               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
