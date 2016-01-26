@@ -99,6 +99,7 @@ This function is only necessary in window system."
   wgrep
   wgrep-ag
   yaml-mode
+  restclient
   yasnippet))
 
 (dolist (p my-packages)
