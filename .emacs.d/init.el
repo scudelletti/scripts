@@ -77,29 +77,30 @@ This function is only necessary in window system."
   (package-refresh-contents))
 
 (defvar my-packages '(
+  ag
   browse-kill-ring
   cider
   clojure-mode
   coffee-mode
   company
+  exec-path-from-shell
   flx-ido
+  flycheck
   haml-mode
+  helm-ag
   ido-vertical-mode
   magit
   monokai-theme
   multiple-cursors
   projectile
+  restclient
   sass-mode
   undo-tree
   vline
   web-mode
-  ag
-  helm-ag
-  exec-path-from-shell
   wgrep
   wgrep-ag
   yaml-mode
-  restclient
   yasnippet))
 
 (dolist (p my-packages)
