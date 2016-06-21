@@ -1,7 +1,6 @@
 [user]
   name = Diogo Scudelletti
   email = diogo@scudelletti.com
-  signingkey = E6545942
 
 [color]
   branch = auto
@@ -27,9 +26,6 @@
 
 [push]
   default = current
-
-[commit]
-  gpgsign = true
 
 [alias]
   st = status
