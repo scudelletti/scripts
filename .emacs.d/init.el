@@ -89,7 +89,9 @@ This function is only necessary in window system."
   haml-mode
   helm-ag
   ido-vertical-mode
+  json-mode
   magit
+  moe-theme
   monokai-theme
   multiple-cursors
   projectile
@@ -321,9 +323,11 @@ This function is only necessary in window system."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (load-theme 'monokai t)
-
 ;; Set Region Background Color
 (set-face-attribute 'region nil :background "#666")
+
+;;(require 'moe-theme)
+;;(moe-light)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
