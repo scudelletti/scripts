@@ -239,14 +239,6 @@ This function is only necessary in window system."
 
 (setq ruby-insert-encoding-magic-comment nil)
 
-(eval-after-load "hideshow"
-  '(add-to-list 'hs-special-modes-alist
-                `(ruby-mode
-                  ,(rx (or "def" "class" "module" "{" "["))
-                  ,(rx (or "}" "]" "end"))
-                  ,(rx (or "#" "=begin"))
-                  ruby-forward-sexp nil)))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Adjust Identation for Ruby and JS                                ;;
@@ -436,9 +428,9 @@ This function is only necessary in window system."
 (eval-after-load "hideshow"
   '(add-to-list 'hs-special-modes-alist
     `(ruby-mode
-      ,(rx (or "def" "class" "module" "{" "[")) ; Block start
-      ,(rx (or "}" "]" "end"))                  ; Block end
-      ,(rx (or "#" "=begin"))                   ; Comment start
+      ,(rx (or "def" "class" "do" "module" "{" "["))
+      ,(rx (or "}" "]" "end"))
+      ,(rx (or "#" "=begin"))
       ruby-forward-sexp nil)))
 
 
