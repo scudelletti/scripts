@@ -47,7 +47,7 @@ cd /Users/scudelletti/.oh-my-zsh/themes
 ln ~/projects/scripts/macos/scudelletti.zsh-theme
 
 cd ~/.oh-my-zsh/
-git remote add personal git@github.com:scudelletti/scripts.git
+git remote add personal git@github.com:scudelletti/oh-my-zsh.git
 git fetch personal
 
 # Apps
