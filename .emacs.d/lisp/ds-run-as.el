@@ -8,6 +8,14 @@
   (if (not (boundp 'ds-run-as-var-path)) (setq ds-run-as-var-path (projectile-project-root)))
   (if (not (boundp 'ds-run-as-var-window-name)) (setq ds-run-as-var-window-name "ds-output")))
 
+(defun ds-run-as-clear-config ()
+  "Clear configuration"
+  (interactive)
+  (makunbound 'ds-run-as-var-bin)
+  (makunbound 'ds-run-as-var-path)
+  (makunbound 'ds-run-as-var-window-name)
+  (ds-run-as-initialize))
+
 (defun ds-run-as-set-path (path)
   "Configure directory that the command will run"
   (interactive "sPath:")
@@ -31,11 +39,20 @@
   "Clear panel"
   (ds-run-as-send-keys "clear"))
 
-(defun ds-run-as ()
-  "Run binary in specific folder with file as argument"
-  (interactive)
+(defun ds-run-as-command (file-and-options)
+"Run binary in specific folder with file as argument"
   (ds-run-as-initialize)
   (ds-run-as-find-or-create-window)
   (ds-run-as-clear-panel)
   (ds-run-as-send-keys (format "cd %s" ds-run-as-var-path))
-  (ds-run-as-send-keys (format "%s %s" ds-run-as-var-bin (buffer-file-name))))
+  (ds-run-as-send-keys (format "%s %s" ds-run-as-var-bin file-and-options)))
+
+(defun ds-run-as ()
+  "Run binary in specific folder with file as argument"
+  (interactive)
+  (ds-run-as-command (buffer-file-name)))
+
+(defun ds-run-as-line ()
+  "Run binary in specific folder with file as argument and line number format: file_name:number"
+  (interactive)
+  (ds-run-as-command (format "%s:%s" (buffer-file-name) (count-lines 1 (point)))))
