@@ -458,7 +458,7 @@ This function is only necessary in window system."
 ;; Personal Functions                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(load-file "~/.emacs.d/lisp/ds-run-as.el")
+(load-file "~/.emacs.d/lisp/ds-run.el")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
