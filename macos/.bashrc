@@ -100,7 +100,7 @@ __aws_env() {
 
 # Retrieve the External IP
 function my_ip(){
-  curl http://curlmyip.com
+  curl -s http://ipecho.net/plain
 }
 
 # Add the Brew Binaries on $PATH variable
