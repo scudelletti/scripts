@@ -276,7 +276,10 @@ This function is only necessary in window system."
  '(list-matching-lines-default-context-lines 1)
  '(magit-diff-use-overlays nil)
  '(ruby-align-to-stmt-keywords t)
- '(standard-indent 2))
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(standard-indent 2)
+ '(tool-bar-mode nil))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
