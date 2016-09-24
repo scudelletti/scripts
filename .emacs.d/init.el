@@ -86,6 +86,7 @@ This function is only necessary in window system."
   monokai-theme
   multiple-cursors
   projectile
+  rainbow-delimiters
   restclient
   sass-mode
   undo-tree
