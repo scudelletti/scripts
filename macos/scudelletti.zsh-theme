@@ -43,7 +43,7 @@ __personal_ruby_version_ps1 () {
 __personal_git_ps1() {
   local exit=$?
   
-  local branch_name=$(__git_ps1 "[%s]" || "")
+  branch_name=$(__git_ps1 "[%s]" || "")
 
   if [[ $branch_name =~ "^\[master.{0,5}\]$" ]]; then
     print "%{\e[47m$fg[red]%}$branch_name%{$reset_color%}"
