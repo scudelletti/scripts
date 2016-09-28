@@ -1,0 +1,25 @@
+#!/usr/bin/swift
+
+import Cocoa
+
+let maxDisplays: UInt32 = 16
+var onlineDisplays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
+var displayCount: UInt32 = 0
+
+let dErr = CGGetOnlineDisplayList(maxDisplays, &onlineDisplays, &displayCount)
+
+for i in 0..<Int(displayCount) {
+  let currentDisplay = onlineDisplays[i]
+  let currentFrame = NSScreen.screens()![i].frame
+
+  //Check if mouse is on currentDisplay
+  if(!NSMouseInRect(NSEvent.mouseLocation(), currentFrame, false)) {
+    // Central coordinates
+    let yLocation = currentFrame.height / 2
+    let xLocation = currentFrame.width / 2
+
+    CGDisplayMoveCursorToPoint(currentDisplay, CGPoint(x: xLocation, y: yLocation))
+
+    exit(0)
+  }
+}
