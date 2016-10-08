@@ -50,8 +50,6 @@ plugins=(zsh_reload npm)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-#export PATH="/Users/scudelletti/.rvm/gems/ruby-2.1.2/bin:/Users/scudelletti/.rvm/gems/ruby-2.1.2@global/bin:/Users/scudelletti/.rvm/rubies/ruby-2.1.2/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin:/Users/scudelletti/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -93,10 +91,6 @@ alias psg="ps aux | grep "
 # Folder's aliases
 alias projects="cd ~/projects"
 
-# RVM Configuration
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-source ~/.rvm/scripts/rvm
-
 # Personal Functions
 function some-company() {
   case "$1" in
@@ -118,3 +112,9 @@ function some-company() {
 function cbn() {
   echo -n $(git symbolic-ref --short -q HEAD) | pbcopy
 }
+
+# rbenv
+eval "$(rbenv init -)"
+
+# Add ~/bin to Path
+PATH=$PATH:$HOME/bin

@@ -1,8 +1,3 @@
-# RVM Configuration
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-source ~/.rvm/scripts/rvm
-
-
 if [ -n "$BASH_VERSION" ]; then
   # Git Configuration
   # enable the git bash completion commands
@@ -35,9 +30,6 @@ RED="\[\033[0;31m\]"
 PURPLE="\[\033[0;35m\]"
 BROWN="\[\033[0;33m\]"
 YELLOW="\[\033[0;33m\]"
-
-# RVM Function to show the version used in PS1
-RVM="\$(~/.rvm/bin/rvm-prompt)"
 
 if [ -n "$BASH_VERSION" ]; then
   # PS1 Configuration with GIT, RVM and AWS Env
