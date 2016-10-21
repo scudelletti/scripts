@@ -5,7 +5,7 @@
 
 #rbenv
 brew update
-brew install rbenv
+brew install rbenv openssl libyaml libffi
 
 # Projects
 mkdir ~/projects
@@ -53,7 +53,7 @@ cd ~/.oh-my-zsh/
 git remote add personal git@github.com:scudelletti/oh-my-zsh.git
 git fetch personal
 
-# Commits from personal repo 
+# Commits from personal repo
 git cherry-pick eea6fcd52a87d69863903f556901eeedef62d6a3
 git cherry-pick 86d97bf444037119f6b5cc1329e5a6cb75d09a9b
 git cherry-pick f77b29d1c6bf5643ab377dde21d4955aa4b2f3da

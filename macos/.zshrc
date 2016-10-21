@@ -127,6 +127,7 @@ function local_ip() {
 
 # rbenv
 eval "$(rbenv init -)"
+RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
 
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
