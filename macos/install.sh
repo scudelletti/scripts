@@ -13,6 +13,8 @@ cd ~/projects
 
 git clone git@github.com:scudelletti/scripts.git
 
+# Setup dotfiles
+cd ~/
 ln -s ~/projects/scripts/.gitconfig
 ln -s ~/projects/scripts/.gitignore
 ln -s ~/projects/scripts/.pryrc
