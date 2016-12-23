@@ -79,6 +79,7 @@ This function is only necessary in window system."
   flycheck
   haml-mode
   helm-ag
+  hide-comnt
   ido-vertical-mode
   json-mode
   magit
