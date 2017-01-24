@@ -12,13 +12,16 @@ for i in 0..<Int(displayCount) {
   let currentDisplay = onlineDisplays[i]
   let currentFrame = NSScreen.screens()![i].frame
 
-  //Check if mouse is on currentDisplay
-  if(!NSMouseInRect(NSEvent.mouseLocation(), currentFrame, false)) {
-    // Central coordinates
-    let yLocation = currentFrame.height / 2
-    let xLocation = currentFrame.width / 2
+  let nextDisplay = onlineDisplays.indices.contains(i+1) ? onlineDisplays[i+1] : onlineDisplays[0]
+  let nextFrame = NSScreen.screens()!.indices.contains(i+1) ? NSScreen.screens()![i+1].frame : NSScreen.screens()![0].frame
 
-    CGDisplayMoveCursorToPoint(currentDisplay, CGPoint(x: xLocation, y: yLocation))
+  //Check if mouse is on currentDisplay
+  if(NSMouseInRect(NSEvent.mouseLocation(), currentFrame, false)) {
+    // Central coordinates
+    let yLocation = nextFrame.height / 2
+    let xLocation = nextFrame.width / 2
+
+    CGDisplayMoveCursorToPoint(nextDisplay, CGPoint(x: xLocation, y: yLocation))
 
     exit(0)
   }
