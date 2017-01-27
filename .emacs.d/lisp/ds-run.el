@@ -28,6 +28,7 @@
 
 (defun ds-run-send-keys (command)
   "Send command to tmux"
+  (interactive "sCommand:")
   (shell-command (format "tmux send-keys '%s' ENTER" command)))
 
 (defun ds-run-find-or-create-window ()
