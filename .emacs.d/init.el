@@ -96,7 +96,8 @@ This function is only necessary in window system."
   wgrep
   wgrep-ag
   yaml-mode
-  yasnippet))
+  yasnippet
+  zoom-window))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -469,6 +470,14 @@ This function is only necessary in window system."
 
 (yas-global-mode 1)
 (put 'dired-find-alternate-file 'disabled nil)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Zoom Window                                                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'zoom-window)
+(global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
