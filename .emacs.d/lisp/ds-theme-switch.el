@@ -4,7 +4,7 @@
 
 (defun ds-switch-theme (theme)
   "Switch between favourite themes"
-  (interactive "sTheme:")
+  (interactive (list (completing-read "Theme: " '("moe" "monokai"))))
   (if (string= theme "moe")
       (ds-swith-theme-set-moe-light)
       (ds-swith-theme-set-monokay)))
