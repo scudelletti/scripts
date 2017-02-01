@@ -48,7 +48,7 @@
   (ds-run-send-keys (format "cd %s" ds-run-var-path))
   (ds-run-send-keys (format "%s %s" ds-run-var-bin file-and-options)))
 
-(defun ds-run ()
+(defun ds-run-file ()
   "Run binary in specific folder with file as argument"
   (interactive)
   (ds-run-command (buffer-file-name)))
@@ -57,3 +57,11 @@
   "Run binary in specific folder with file as argument and line number format: file_name:number"
   (interactive)
   (ds-run-command (format "%s:%s" (buffer-file-name) (count-lines 1 (point)))))
+
+(defun ds-run (line_only_flag)
+  "Run binary in specific folder with file as argument. When a simple prefix argument is present run the line only"
+  (interactive "P")
+  ;; '(4) is the argument when called like C-u M-x ds-run
+  (if (equal '(4) line_only_flag)
+      (ds-run-line)
+      (ds-run-file)))
