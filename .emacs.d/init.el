@@ -94,6 +94,7 @@ This function is only necessary in window system."
   undo-tree
   vline
   web-mode
+  which-key
   wgrep
   wgrep-ag
   yaml-mode
@@ -486,6 +487,13 @@ This function is only necessary in window system."
 
 (require 'zoom-window)
 (global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Enable Which Key Minor Model - Help with shortcuts               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(which-key-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
