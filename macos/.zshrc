@@ -112,7 +112,9 @@ function some-company() {
     echo "some-company f    Go to some-company/some-folder folder"
   ;;
   esac
+}
 
+# User Emacs Server if server is available
 function emc() {
   emacsclient -n $1 || emacs -nw $1
 }
