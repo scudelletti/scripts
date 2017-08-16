@@ -45,7 +45,7 @@ ZSH_THEME="scudelletti"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload npm)
+plugins=(zsh_reload)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,7 +53,10 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Fix Tmux Powerline Fonts
+export LC_CTYPE=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -67,6 +70,9 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Disable Spring
+export DISABLE_SPRING=1
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -83,9 +89,9 @@ alias got="git"
 alias ll="ls -la"
 alias be="bundle exec"
 alias bi="bundle check || bundle install"
-alias ebashrc="subl ~/.bashrc"
-alias ezshrc="subl ~/.zshrc"
-alias ehosts="sudo subl /etc/hosts"
+alias ebashrc="emc ~/.bashrc"
+alias ezshrc="emc ~/.zshrc"
+alias ehosts="sudo vim /etc/hosts"
 alias psg="ps aux | grep "
 
 # Folder's aliases
@@ -106,6 +112,9 @@ function some-company() {
     echo "some-company f    Go to some-company/some-folder folder"
   ;;
   esac
+
+function emc() {
+  emacsclient -n $1 || emacs -nw $1
 }
 
 # Copy Branch Name
@@ -127,7 +136,6 @@ function local_ip() {
 
 # rbenv
 eval "$(rbenv init -)"
-RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
 
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
