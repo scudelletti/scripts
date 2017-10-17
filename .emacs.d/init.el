@@ -45,6 +45,7 @@ This function is only necessary in window system."
   (pasteboard-copy)
   (delete-region (region-beginning) (region-end)))
 
+;; Define Keybindings
 (if window-system
     (progn
       (isolate-kill-ring)
@@ -55,10 +56,19 @@ This function is only necessary in window system."
       ;; bind CMD+X to pasteboard-cut
       (global-set-key (kbd "s-x") 'pasteboard-cut))
 
-  ;; you might also want to assign some keybindings for non-window
-  ;; system usage (i.e., in your text terminal, where the
-  ;; command->super does not work)
+    ;; you might also want to assign some keybindings for non-windowc
+    ;; system usage (i.e., in your text terminal, where the
+    ;; command->super does not work)
+    (progn
+      (isolate-kill-ring)
+      ;; bind CMD+C to pasteboard-copy
+      (global-set-key (kbd "C-c C-c") 'pasteboard-copy)
+      ;; bind CMD+V to pasteboard-paste
+      (global-set-key (kbd "C-c C-v") 'pasteboard-paste)
+      ;; bind CMD+X to pasteboard-cut
+      (global-set-key (kbd "C-c C-x") 'pasteboard-cut))
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Install Packages                                                ;;
