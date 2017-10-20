@@ -85,6 +85,7 @@ This function is only necessary in window system."
   clojure-mode
   coffee-mode
   company
+  enh-ruby-mode
   exec-path-from-shell
   flx-ido
   flycheck
@@ -256,17 +257,10 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ruby - Don't add encoding on top of the files                    ;;
+;; Adjust Deep Identation for Ruby and JS                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq ruby-insert-encoding-magic-comment nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Adjust Identation for Ruby and JS                                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq ruby-deep-indent-paren nil)
+(setq enh-ruby-bounce-deep-indent t)
 (setq js-deep-indent-paren nil)
 
 
