@@ -101,6 +101,7 @@ This function is only necessary in window system."
   projectile
   rainbow-delimiters
   restclient
+  rspec-mode
   sass-mode
   undo-tree
   vline
