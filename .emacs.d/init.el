@@ -62,11 +62,11 @@ This function is only necessary in window system."
     (progn
       (isolate-kill-ring)
       ;; bind CMD+C to pasteboard-copy
-      (global-set-key (kbd "C-c C-c") 'pasteboard-copy)
+      (global-set-key (kbd "C-c c") 'pasteboard-copy)
       ;; bind CMD+V to pasteboard-paste
-      (global-set-key (kbd "C-c C-v") 'pasteboard-paste)
+      (global-set-key (kbd "C-c v") 'pasteboard-paste)
       ;; bind CMD+X to pasteboard-cut
-      (global-set-key (kbd "C-c C-x") 'pasteboard-cut))
+      (global-set-key (kbd "C-c x") 'pasteboard-cut))
   )
 
 
