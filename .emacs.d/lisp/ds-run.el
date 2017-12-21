@@ -34,7 +34,7 @@
 (defun ds-run-find-or-create-window ()
   "Select or create a window based on configured window name"
   (shell-command
-   (format "tmux find-window %s || tmux new-window -n %s" ds-run-var-window-name ds-run-var-window-name)))
+   (format "tmux select-window -t %s || tmux new-window -n %s" ds-run-var-window-name ds-run-var-window-name)))
 
 (defun ds-run-clear-panel ()
   "Clear panel"
