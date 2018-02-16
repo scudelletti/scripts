@@ -1,13 +1,67 @@
-# Git Configuration
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWUPSTREAM="auto"
-
 # Fix Tmux Powerline Fonts
 export LC_CTYPE="en_US.UTF-8"
 
-source $HOME/.oh-my-zsh/plugins/gitfast/git-prompt.sh
+git_info() {
+  # Git branch/tag, or name-rev if on detached head
+  local GIT_LOCATION=${$((git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null)#(refs/heads/|tags/)}
+
+  if [ -n "$GIT_LOCATION" ]; then
+    local PREFIX="%{$fg[magenta]%}[%{$reset_color%}"
+    local SUFIX="%{$fg[magenta]%}]%{$reset_color%}"
+    local AHEAD="%{$fg[red]%}⇡NUM%{$reset_color%}"
+    local BEHIND="%{$fg[cyan]%}⇣NUM%{$reset_color%}"
+    local MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
+    local UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
+    local MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
+    local STAGED="%{$fg[green]%}●%{$reset_color%}"
+    local STASH="%{$fg[blue]%}●%{$reset_color%}"
+
+    local -a DIVERGENCES
+    local -a FLAGS
+
+    local NUM_STASH="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+    if [ "$NUM_AHEAD" -gt 0 ]; then
+      DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
+    fi
+
+    local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+    if [ "$NUM_AHEAD" -gt 0 ]; then
+      DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
+    fi
+
+    local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+    if [ "$NUM_BEHIND" -gt 0 ]; then
+      DIVERGENCES+=( "${BEHIND//NUM/$NUM_BEHIND}" )
+    fi
+
+    local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+    if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+      FLAGS+=( "$MERGING" )
+    fi
+
+    if ! git diff --cached --quiet 2> /dev/null; then
+      FLAGS+=( "$STAGED" )
+    fi
+
+    if ! git diff --quiet 2> /dev/null; then
+      FLAGS+=( "$MODIFIED" )
+    fi
+
+    if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+      FLAGS+=( "$UNTRACKED" )
+    fi
+
+    local -a GIT_INFO
+    GIT_INFO+=( $PREFIX )
+    [ -n "$GIT_STATUS" ] && GIT_INFO+=( "$GIT_STATUS" )
+    GIT_INFO+=( "$fg[magenta]$GIT_LOCATION%{$reset_color%} " )
+    [[ ${#DIVERGENCES[@]} -ne 0 ]] && GIT_INFO+=( "${(j::)DIVERGENCES}" )
+    [[ ${#FLAGS[@]} -ne 0 ]] && GIT_INFO+=( "${(j::)FLAGS}" )
+    GIT_INFO+=( $SUFIX )
+    print "${(j::)GIT_INFO}"
+  fi
+}
+
 
 # We need to store the last exit status and return it on the end to avoid changing it
 __personal_hostname_ps1 () {
@@ -20,7 +74,7 @@ __personal_hostname_ps1 () {
 
 __personal_last_exit_code_ps1() {
   local exit=$?
-  
+
   if [ "$exit" = "0" ]; then
     print "%{$fg[green]%}[$exit]%{$reset_color%}"
   else
@@ -42,21 +96,15 @@ __personal_ruby_version_ps1 () {
 
 __personal_git_ps1() {
   local exit=$?
-  
-  branch_name=$(__git_ps1 "[%s]" || "")
 
-  if [[ $branch_name =~ "^\[master.{0,5}\]$" ]]; then
-    print "%{\e[47m$fg[red]%}$branch_name%{$reset_color%}"
-  else
-    print "%{$fg[magenta]%}$branch_name%{$reset_color%}"
-  fi
+  print $(git_info)
 
   return $exit
 }
 
 __personal_username_ps1 () {
   local exit=$?
-  
+
   print "%{$fg_bold[blue]%}%n%{$reset_color%}"
 
   return $exit
