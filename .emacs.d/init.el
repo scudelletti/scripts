@@ -393,6 +393,7 @@ This function is only necessary in window system."
 ;; Start Emacs Server                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq server-name "default")
 (server-start)
 
 

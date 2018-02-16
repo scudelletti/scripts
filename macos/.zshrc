@@ -116,7 +116,7 @@ function some-company() {
 
 # User Emacs Server if server is available
 function emc() {
-  emacsclient -n $1 || emacs -nw $1
+  emacsclient -n -s ${EMACS_SOCKET:-default} $1 || emacs -nw $1
 }
 
 # Copy Branch Name
