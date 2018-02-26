@@ -14,15 +14,10 @@ git_info() {
     local UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
     local MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
     local STAGED="%{$fg[green]%}●%{$reset_color%}"
-    local STASH="%{$fg[blue]%}●%{$reset_color%}"
+    local STASH="%{$fg_bold[blue]%}¦NUM%{$reset_color%}"
 
     local -a DIVERGENCES
     local -a FLAGS
-
-    local NUM_STASH="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-    if [ "$NUM_AHEAD" -gt 0 ]; then
-      DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
-    fi
 
     local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
     if [ "$NUM_AHEAD" -gt 0 ]; then
@@ -32,6 +27,11 @@ git_info() {
     local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
     if [ "$NUM_BEHIND" -gt 0 ]; then
       DIVERGENCES+=( "${BEHIND//NUM/$NUM_BEHIND}" )
+    fi
+
+    local NUM_STASH="$(git stash list --oneline 2> /dev/null | wc -l | tr -d ' ')"
+    if [ "$NUM_STASH" -gt 0 ]; then
+      DIVERGENCES+=( "${STASH//NUM/$NUM_STASH}" )
     fi
 
     local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
