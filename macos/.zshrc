@@ -124,18 +124,6 @@ function cbn() {
   echo -n $(git symbolic-ref --short -q HEAD) | pbcopy
 }
 
-# List local IPs
-function local_ip() {
-  amount_of_lines=$1
-
-  if [ $# -eq 0 ]
-    then
-    amount_of_lines=1
-  fi
-
-  ifconfig | grep "inet " | cut -f2 -d' ' | grep -v "127.0.0.1" | head -n $amount_of_lines
-}
-
 # rbenv
 eval "$(rbenv init -)"
 
