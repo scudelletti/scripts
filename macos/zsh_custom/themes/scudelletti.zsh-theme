@@ -10,7 +10,8 @@ git_info() {
     local SUFIX="%{$fg[magenta]%}]%{$reset_color%}"
     local AHEAD="%{$fg[red]%}⇡NUM%{$reset_color%}"
     local BEHIND="%{$fg[cyan]%}⇣NUM%{$reset_color%}"
-    local MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
+    local MERGING="%{$fg_bold[red]%}⚡︎%{$reset_color%}"
+    local REBASING="%{$fg[red]%}⚡︎%{$reset_color%}"
     local UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
     local MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
     local STAGED="%{$fg[green]%}●%{$reset_color%}"
@@ -37,6 +38,10 @@ git_info() {
     local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
     if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
       FLAGS+=( "$MERGING" )
+    fi
+
+    if [ -n $GIT_DIR ] && (test -r $GIT_DIR/rebase-apply || test -r $GIT_DIR/rebase-merge); then
+      FLAGS+=( "$REBASING" )
     fi
 
     if ! git diff --cached --quiet 2> /dev/null; then
