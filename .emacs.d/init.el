@@ -91,7 +91,6 @@ This function is only necessary in window system."
   flycheck
   haml-mode
   helm-ag
-  hide-comnt
   ido-vertical-mode
   json-mode
   magit
@@ -104,7 +103,6 @@ This function is only necessary in window system."
   rspec-mode
   sass-mode
   undo-tree
-  vline
   web-mode
   which-key
   wgrep
