@@ -78,6 +78,3 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 cd ~/
 rm .zshrc
 ln -s ~/projects/scripts/macos/.zshrc
-
-# Change Shell to ZSH
-chsh -s /bin/zsh
