@@ -5,7 +5,7 @@
 
 #rbenv
 brew update
-brew install rbenv openssl libyaml libffi
+brew install rbenv
 
 # Projects
 mkdir ~/projects
@@ -20,7 +20,6 @@ ln -s ~/projects/scripts/.gitignore
 ln -s ~/projects/scripts/.pryrc
 ln -s ~/projects/scripts/.irbrc
 ln -s ~/projects/scripts/macos/.bashrc
-ln -s ~/projects/scripts/macos/.zshrc
 ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/.tmux-powerlinerc
 ln -s ~/projects/scripts/macos/.profile
@@ -42,7 +41,7 @@ git checkout production
 # Emacs
 brew install --with-cocoa --srgb emacs
 cd ~/
-ln -s /Users/scudelletti/projects/scripts/.emacs.d
+ln -s ~/projects/scripts/.emacs.d
 
 # Sublime CLI
 ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
@@ -50,19 +49,9 @@ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/loca
 # Oh-My-ZSH
 brew install zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-cd ~/.oh-my-zsh/
-git remote add personal git@github.com:scudelletti/oh-my-zsh.git
-git fetch personal
-
-# Commits from personal repo
-git cherry-pick eea6fcd52a87d69863903f556901eeedef62d6a3
-git cherry-pick 86d97bf444037119f6b5cc1329e5a6cb75d09a9b
-git cherry-pick f77b29d1c6bf5643ab377dde21d4955aa4b2f3da
-
-# Copy personal theme
-cd /Users/scudelletti/.oh-my-zsh/themes
-ln ~/projects/scripts/macos/scudelletti.zsh-theme
+cd ~/
+rm .zshrc
+ln -s ~/projects/scripts/macos/.zshrc
 
 # Apps
 # brew cask install google-chrome
