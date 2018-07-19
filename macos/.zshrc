@@ -129,3 +129,7 @@ eval "$(rbenv init -)"
 
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
+
+# ASDF Scripts
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

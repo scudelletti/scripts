@@ -41,6 +41,7 @@ ln -s ~/projects/scripts/.gitconfig
 ln -s ~/projects/scripts/.gitignore
 ln -s ~/projects/scripts/.pryrc
 ln -s ~/projects/scripts/.irbrc
+ln -s ~/projects/scripts/.asdfrc
 ln -s ~/projects/scripts/macos/.bashrc
 ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/.tmux-powerlinerc
