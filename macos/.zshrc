@@ -92,7 +92,6 @@ alias bi="bundle check || bundle install"
 alias ebashrc="emc ~/.bashrc"
 alias ezshrc="emc ~/.zshrc"
 alias ehosts="sudo vim /etc/hosts"
-alias psg="ps aux | grep "
 
 # Folder's aliases
 alias projects="cd ~/projects"
@@ -124,12 +123,9 @@ function cbn() {
   echo -n $(git symbolic-ref --short -q HEAD) | pbcopy
 }
 
-# rbenv
-eval "$(rbenv init -)"
-
-# Add ~/bin to Path
-PATH=$PATH:$HOME/bin
-
 # ASDF Scripts
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+# Add ~/bin to Path
+PATH=$PATH:$HOME/bin
