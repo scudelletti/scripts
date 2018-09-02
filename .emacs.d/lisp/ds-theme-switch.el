@@ -15,6 +15,7 @@
 
   ;; Configs that are somethimes overridden by other themes
   (set-face-attribute 'region nil :background "#666")
+  (set-face-attribute 'vertical-border nil :foreground "#666" :background "#080808")
   (set-face-attribute 'minibuffer-prompt nil :foreground "#66D9EF" :background "#080808"))
 
 (defun ds-swith-theme-set-moe-light ()
