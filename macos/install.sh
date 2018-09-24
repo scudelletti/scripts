@@ -14,6 +14,7 @@
 # brew cask install caffeine
 # brew cask install google-drive
 # brew cask install sublime
+# brew cask install docker
 
 ##
 # Move ssh keys before running
@@ -25,7 +26,6 @@
 
 #rbenv
 brew update
-brew install rbenv
 
 
 # Projects
@@ -46,6 +46,15 @@ ln -s ~/projects/scripts/macos/.bashrc
 ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/.tmux-powerlinerc
 ln -s ~/projects/scripts/macos/.profile
+
+
+# Oh-My-ZSH
+brew install zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+cd ~/
+rm .zshrc
+ln -s ~/projects/scripts/macos/.zshrc
+
 
 # Tmux
 brew install tmux
@@ -73,9 +82,5 @@ ln -s ~/projects/scripts/.emacs.d
 ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 
 
-# Oh-My-ZSH
-brew install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-cd ~/
-rm .zshrc
-ln -s ~/projects/scripts/macos/.zshrc
+# asdf - Check latest version at https://github.com/asdf-vm/asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.1
