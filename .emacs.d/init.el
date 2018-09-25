@@ -430,8 +430,10 @@ This function is only necessary in window system."
 ;; Projectile                                                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(projectile-mode +1)
 (projectile-global-mode)
 (setq projectile-enable-caching t)
+(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
