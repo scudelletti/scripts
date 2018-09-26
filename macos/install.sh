@@ -46,6 +46,7 @@ ln -s ~/projects/scripts/macos/.bashrc
 ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/.tmux-powerlinerc
 ln -s ~/projects/scripts/macos/.profile
+ln -s ~/projects/scripts/macos/bin/
 
 
 # Oh-My-ZSH
