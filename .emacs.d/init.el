@@ -348,6 +348,9 @@ This function is only necessary in window system."
 (load-file "~/.emacs.d/lisp/ds-run.el")
 (load-file "~/.emacs.d/lisp/ds-theme-switch.el")
 
+(ds-run-set-bin "MIX_ENV=test iex -S mix do test")
+(ds-run-set-suffix ", halt")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Themes                                                           ;;
