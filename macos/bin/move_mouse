@@ -9,14 +9,14 @@ var displayCount: UInt32 = 0
 let dErr = CGGetOnlineDisplayList(maxDisplays, &onlineDisplays, &displayCount)
 
 for i in 0..<Int(displayCount) {
-  let currentDisplay = onlineDisplays[i]
-  let currentFrame = NSScreen.screens()![i].frame
+  //let currentDisplay = onlineDisplays[i]
+  let currentFrame = NSScreen.screens[i].frame
 
   let nextDisplay = onlineDisplays.indices.contains(i+1) ? onlineDisplays[i+1] : onlineDisplays[0]
-  let nextFrame = NSScreen.screens()!.indices.contains(i+1) ? NSScreen.screens()![i+1].frame : NSScreen.screens()![0].frame
+  let nextFrame = NSScreen.screens.indices.contains(i+1) ? NSScreen.screens[i+1].frame : NSScreen.screens[0].frame
 
   //Check if mouse is on currentDisplay
-  if(NSMouseInRect(NSEvent.mouseLocation(), currentFrame, false)) {
+  if(NSMouseInRect(NSEvent.mouseLocation, currentFrame, false)) {
     // Central coordinates
     let yLocation = nextFrame.height / 2
     let xLocation = nextFrame.width / 2
