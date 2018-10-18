@@ -14,3 +14,4 @@
 
 # Emacs Stuff
 .projectile
+.elixir_ls/
