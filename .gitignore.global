@@ -1,0 +1,17 @@
+# Mac OSx
+.DS_Store
+
+# Sublime
+.tags
+.gemtags
+.tags_sorted_by_file
+
+# Intellij
+.idea/
+*.iml
+*.iws
+.rakeTasks
+
+# Emacs Stuff
+.projectile
+.elixir_ls/
