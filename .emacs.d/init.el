@@ -78,7 +78,6 @@ This function is only necessary in window system."
   (package-refresh-contents))
 
 (defvar my-packages '(
-  alchemist
   ag
   anzu
   browse-kill-ring
