@@ -147,7 +147,7 @@ This function is only necessary in window system."
 ;; Disable *Messages* Buffer                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default message-log-max nil)
+;;(setq-default message-log-max nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -368,6 +368,9 @@ This function is only necessary in window system."
    '("~/projects/others/elixir-ls/release/language_server.sh"))
 
 (add-hook 'elixir-mode-hook #'lsp-elixir-enable)
+
+;; Avoid messages on Minibuffer/Echo Area
+(setq lsp-inhibit-message t)
 
 (require 'company-lsp)
 (push 'company-lsp company-backends)
