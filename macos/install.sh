@@ -85,3 +85,10 @@ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/loca
 
 # asdf - Check latest version at https://github.com/asdf-vm/asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.1
+
+
+# Elixir-LS
+cd ~/projects/others
+git clone https://github.com/JakeBecker/elixir-ls.git
+cd elixir-ls
+mix do deps.get, compile, elixir_ls.release
