@@ -97,6 +97,7 @@ This function is only necessary in window system."
   moe-theme
   monokai-theme
   multiple-cursors
+  phi-search
   projectile
   rainbow-delimiters
   restclient
