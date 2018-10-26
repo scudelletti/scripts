@@ -85,6 +85,8 @@ This function is only necessary in window system."
   clojure-mode
   coffee-mode
   company
+  company-lsp
+  elixir-mode
   enh-ruby-mode
   exec-path-from-shell
   flx-ido
@@ -93,6 +95,8 @@ This function is only necessary in window system."
   helm-ag
   ido-vertical-mode
   json-mode
+  lsp-mode
+  lsp-ui
   magit
   moe-theme
   monokai-theme
@@ -353,6 +357,23 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LSP-Mode - Configuration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'lsp-mode)
+(lsp-define-stdio-client
+   lsp-elixir
+   "elixir"
+   #'projectile-project-root
+   '("~/projects/others/elixir-ls/release/language_server.sh"))
+
+(add-hook 'elixir-mode-hook #'lsp-elixir-enable)
+
+(require 'company-lsp)
+(push 'company-lsp company-backends)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Themes                                                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -452,6 +473,7 @@ This function is only necessary in window system."
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html.eex\\'" . web-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
