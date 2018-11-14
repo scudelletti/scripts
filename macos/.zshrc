@@ -80,6 +80,9 @@ export EDITOR="emacs -nw"
 # Enable Erlang Shell History
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+# Set Elixir Editor
+export ELIXIR_EDITOR="emc +__LINE__ __FILE__"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -117,11 +120,6 @@ function some-company() {
     echo "some-company f    Go to some-company/some-folder folder"
   ;;
   esac
-}
-
-# User Emacs Server if server is available
-function emc() {
-  emacsclient -n -s ${EMACS_SOCKET:-default} $@ || emacs -nw $@
 }
 
 # Copy Branch Name
