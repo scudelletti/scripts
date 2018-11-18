@@ -133,3 +133,8 @@ function cbn() {
 
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
+
+if [[ $DISPLAY ]]; then
+  [[ $- != *i* ]] && return
+  [[ -z "$TMUX" ]] && exec tmux
+fi
