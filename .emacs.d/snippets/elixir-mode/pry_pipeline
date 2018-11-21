@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: pry pipeline
+# key: pryp
+# --
+|> (fn arg -> require IEx; IEx.pry; arg end).()
