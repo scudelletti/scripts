@@ -1,0 +1,5 @@
+keymaps 0-2,4-5,8,12
+keycode  56 =
+keycode  58 = Control
+keycode  125 = Alt
+
