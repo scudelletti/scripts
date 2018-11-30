@@ -26,18 +26,25 @@ This function is only necessary in window system."
   (setq interprogram-cut-function nil)
   (setq interprogram-paste-function nil))
 
+(defvar pasteboard-copy-cmd (cond
+  ((executable-find "pbcopy") "pbcopy")
+   ((executable-find "xclip") "xclip -selection clipboard -i &> /dev/null")))
+
+(defvar pasteboard-paste-cmd (cond
+  ((executable-find "pbcopy") "pbcopy")
+  ((executable-find "xclip") "xclip -selection clipboard -o")))
 
 (defun pasteboard-copy()
   "Copy region to OS X system pasteboard."
   (interactive)
   (shell-command-on-region
-   (region-beginning) (region-end) "pbcopy"))
+   (region-beginning) (region-end) pasteboard-copy-cmd))
 
 (defun pasteboard-paste()
   "Paste from OS X system pasteboard via `pbpaste' to point."
   (interactive)
   (shell-command-on-region
-   (point) (if mark-active (mark) (point)) "pbpaste" nil t))
+   (point) (if mark-active (mark) (point)) pasteboard-paste-cmd nil t))
 
 (defun pasteboard-cut()
   "Cut region and put on OS X system pasteboard."
