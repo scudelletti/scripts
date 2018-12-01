@@ -2,6 +2,9 @@
 sudo mkdir -p /usr/local/share/kdb/keymaps
 sudo ln -s ~/projects/scripts/linux/keymap_custom.map /usr/local/share/kdb/keymaps/custom.map
 
+# Enable Magic SysRq key
+sudo ln -s ~/projects/scripts/linux/99-sysctl.conf /etc/sysctl.d/99-sysctl.conf
+
 # Setup X
 ln -s projects/scripts/linux/.xinitrc
 ln -s projects/scripts/linux/.Xmodmap
