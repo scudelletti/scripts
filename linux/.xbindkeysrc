@@ -1,4 +1,4 @@
-"amixer set Mic toggle"
+"amixer set Capture toggle"
   XF86AudioMicMute
 "amixer set Master toggle"
   XF86AudioMute
