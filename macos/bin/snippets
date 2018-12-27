@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Usage:
+# rofi -modi "snippets:$HOME/bin/snippets" -show snippets
+
+# Usage with other modes for example greenclip
+# rofi -modi combi -combi-modi "snippets:$HOME/bin/snippets"#"clipboard:greenclip print" -show combi -run-command '{cmd}'
+
+if test "$@"
+then
+  cat ~/snippets/$@ | xclip -f -i -selection clipboard &> /dev/null
+else
+  cd ~/snippets
+  find .  -type f
+fi
+
