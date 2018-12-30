@@ -367,17 +367,11 @@ This function is only necessary in window system."
 ;; LSP-Mode - Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Elixir
+(setq lsp-clients-elixir-server-executable "~/projects/others/elixir-ls/release/language_server.sh")
+(add-hook 'elixir-mode-hook #'lsp)
+
 (require 'lsp-mode)
-(lsp-define-stdio-client
-   lsp-elixir
-   "elixir"
-   #'projectile-project-root
-   '("~/projects/others/elixir-ls/release/language_server.sh"))
-
-(add-hook 'elixir-mode-hook #'lsp-elixir-enable)
-
-;; Avoid messages on Minibuffer/Echo Area
-(setq lsp-inhibit-message t)
 
 (require 'company-lsp)
 (push 'company-lsp company-backends)
