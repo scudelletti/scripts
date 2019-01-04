@@ -172,10 +172,16 @@ This function is only necessary in window system."
 ;;  Backup files directory                                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defvar emacs-backup-directory-path "~/.emacs_backups/")
+
 (setq backup-directory-alist
-      `((".*" . ,"~/.emacs_backups/")))
+      `((".*" . ,emacs-backup-directory-path)))
 (setq auto-save-file-name-transforms
-      `((".*" ,"~/.emacs_backups/" t)))
+      `((".*" ,emacs-backup-directory-path t)))
+
+(or
+ (file-directory-p emacs-backup-directory-path)
+ (make-directory emacs-backup-directory-path))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Define Emacs socket name based on environment variable        ;;
