@@ -321,6 +321,8 @@ This function is only necessary in window system."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(js-indent-level 2)
  '(list-matching-lines-default-context-lines 1)
+ '(lsp-ui-doc-enable nil)
+ '(lsp-ui-sideline-enable nil)
  '(magit-diff-use-overlays nil)
  '(ruby-align-to-stmt-keywords t)
  '(scroll-bar-mode nil)
@@ -367,21 +369,11 @@ This function is only necessary in window system."
 ;; LSP-Mode - Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Elixir
+(setq lsp-prefer-flymake nil)
+
+;; ;; Elixir
 (setq lsp-clients-elixir-server-executable "~/projects/others/elixir-ls/release/language_server.sh")
 (add-hook 'elixir-mode-hook #'lsp)
-
-(require 'lsp-mode)
-
-(require 'company-lsp)
-(push 'company-lsp company-backends)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flycheck - Credo                                                 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(eval-after-load 'flycheck '(flycheck-credo-setup))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
