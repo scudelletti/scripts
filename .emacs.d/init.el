@@ -98,6 +98,7 @@ This function is only necessary in window system."
   exec-path-from-shell
   flx-ido
   flycheck
+  flycheck-credo
   haml-mode
   helm-ag
   ido-vertical-mode
@@ -372,15 +373,29 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; LSP-Mode - Configuration
+;; LSP-Mode - Configuration                                         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq lsp-prefer-flymake nil)
 
 ;; ;; Elixir
-(setq lsp-clients-elixir-server-executable "~/projects/others/elixir-ls/release/language_server.sh")
+(setq lsp-clients-elixir-server-executable
+      "~/projects/others/elixir-ls/release/language_server.sh")
 (add-hook 'elixir-mode-hook #'lsp)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Flycheck - Credo                                                 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'flycheck-credo)
+(require 'flycheck)
+
+(eval-after-load 'flycheck
+  '(flycheck-credo-setup))
+
+(require 'lsp-ui-flycheck)
+(flycheck-add-next-checker 'lsp-ui '(warning . elixir-credo))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Themes                                                           ;;
