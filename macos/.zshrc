@@ -95,7 +95,7 @@ export ELIXIR_EDITOR="emc +__LINE__ __FILE__"
 # Aliases
 alias tmuxa="tmux a || tmux"
 alias got="git"
-alias ll="ls -la"
+alias ll="ls -lha"
 alias be="bundle exec"
 alias bi="bundle check || bundle install"
 alias ebashrc="emc ~/.bashrc"
