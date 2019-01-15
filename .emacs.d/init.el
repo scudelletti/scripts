@@ -370,6 +370,7 @@ This function is only necessary in window system."
 
 (ds-run-set-bin "MIX_ENV=test iex -S mix do test")
 (ds-run-set-suffix " --trace , halt")
+(ds-run-set-file-hook (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

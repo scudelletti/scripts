@@ -8,7 +8,8 @@
   (if (not (boundp 'ds-run-var-suffix)) (setq ds-run-var-suffix ""))
   (if (not (boundp 'ds-run-var-path)) (setq ds-run-var-path nil))
   (if (not (boundp 'ds-run-var-window-name)) (setq ds-run-var-window-name "ds-output"))
-  (if (not (boundp 'ds-run-var-relative-path)) (setq ds-run-var-relative-path t)))
+  (if (not (boundp 'ds-run-var-relative-path)) (setq ds-run-var-relative-path t))
+  (if (not (boundp 'ds-run-var-file-hook)) (setq ds-run-var-file-hook (lambda (file) file))))
 
 (defun ds-run-clear-config ()
   "Clear configuration"
@@ -41,6 +42,10 @@
   (let* ((flag (if (equal raw-flag '("nil")) nil t)))
     (setq ds-run-var-relative-path flag)))
 
+(defun ds-run-set-file-hook (fun)
+  "Hook to change file name"
+  (setq ds-run-var-file-hook fun))
+
 (defun ds-run-send-keys (command)
   "Send command to tmux"
   (interactive "sCommand:")
@@ -61,7 +66,6 @@
 
 (defun ds-run-command (file-and-options)
   "Run binary in specific folder with file as argument"
-  (ds-run-initialize)
   (ds-run-find-or-create-window)
   (ds-run-clear-panel)
   (ds-run-send-keys (format "cd %s" (ds-run-path)))
@@ -79,9 +83,9 @@
 
 (defun ds-buffer-file-name ()
   "Buffer file name - Can be relative or not based on configuration"
-  (if ds-run-var-relative-path
+  (funcall ds-run-var-file-hook (if ds-run-var-relative-path
       (ds-file-with-relative-path)
-    (buffer-file-name)))
+    (buffer-file-name))))
 
 (defun ds-file-with-relative-path ()
   "Return path relative to "
@@ -91,6 +95,7 @@
   "Run binary in specific folder with file as argument. When a simple prefix argument is present run the line only"
   (interactive "P")
   ;; '(4) is the argument when called like C-u M-x ds-run
+  (ds-run-initialize)
   (if (equal '(4) line_only_flag)
       (ds-run-line)
     (ds-run-file)))
