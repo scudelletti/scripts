@@ -7,7 +7,8 @@
   (if (not (boundp 'ds-run-var-bin)) (setq ds-run-var-bin "bundle exec rspec"))
   (if (not (boundp 'ds-run-var-suffix)) (setq ds-run-var-suffix ""))
   (if (not (boundp 'ds-run-var-path)) (setq ds-run-var-path nil))
-  (if (not (boundp 'ds-run-var-window-name)) (setq ds-run-var-window-name "ds-output")))
+  (if (not (boundp 'ds-run-var-window-name)) (setq ds-run-var-window-name "ds-output"))
+  (if (not (boundp 'ds-run-var-relative-path)) (setq ds-run-var-relative-path t)))
 
 (defun ds-run-clear-config ()
   "Clear configuration"
@@ -16,6 +17,7 @@
   (makunbound 'ds-run-var-suffix)
   (makunbound 'ds-run-var-path)
   (makunbound 'ds-run-var-window-name)
+  (markunbound 'ds-run-var-relative-path)
   (ds-run-initialize))
 
 (defun ds-run-set-path (path)
@@ -32,6 +34,12 @@
   "Configure command suffix"
   (interactive "sSuffix:")
   (setq ds-run-var-suffix suffix))
+
+(defun ds-run-set-relative-path (raw-flag)
+  "Configure relative path for file name"
+  (interactive (list (completing-read "sFlag: " '("nil" "t"))))
+  (let* ((flag (if (equal raw-flag '("nil")) nil t)))
+    (setq ds-run-var-relative-path flag)))
 
 (defun ds-run-send-keys (command)
   "Send command to tmux"
@@ -62,12 +70,22 @@
 (defun ds-run-file ()
   "Run binary in specific folder with file as argument"
   (interactive)
-  (ds-run-command (buffer-file-name)))
+  (ds-run-command (ds-buffer-file-name)))
 
 (defun ds-run-line ()
   "Run binary in specific folder with file as argument and line number format: file_name:number"
   (interactive)
-  (ds-run-command (format "%s:%s" (buffer-file-name) (count-lines 1 (point)))))
+  (ds-run-command (format "%s:%s" (ds-buffer-file-name) (count-lines 1 (point)))))
+
+(defun ds-buffer-file-name ()
+  "Buffer file name - Can be relative or not based on configuration"
+  (if ds-run-var-relative-path
+      (ds-file-with-relative-path)
+    (buffer-file-name)))
+
+(defun ds-file-with-relative-path ()
+  "Return path relative to "
+  (cadr (split-string (buffer-file-name) (projectile-project-root))))
 
 (defun ds-run (line_only_flag)
   "Run binary in specific folder with file as argument. When a simple prefix argument is present run the line only"
