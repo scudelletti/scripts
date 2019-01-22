@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: pry with
+# key: pryw
+# --
+_ <- (fn -> require IEx; IEx.pry; nil end).(),
