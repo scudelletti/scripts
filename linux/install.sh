@@ -28,4 +28,10 @@ ln -s projects/scripts/linux/.xinitrc
 ln -s projects/scripts/linux/.xbindkeysrc
 ln -s projects/scripts/linux/.Xresources
 ln -s projects/scripts/linux/.xprofile
-ln -s projects/scripts/linux/i3 .config/i3
+
+cd ~/.config
+ln -s ~/projects/scripts/linux/i3
+ln -s ~/projects/scripts/linux/i3status
+
+# GTK Emacs Keybindings
+ln -s ~/projects/scripts/linux/gtk-3.0 ~/.config/gtk-3.0
