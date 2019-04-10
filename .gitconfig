@@ -22,7 +22,7 @@
   excludesfile = ~/.gitignore
 
 [help]
-  autocorrect = 1
+  autocorrect = 0
 
 [push]
   default = current
