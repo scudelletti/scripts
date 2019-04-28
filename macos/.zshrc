@@ -71,6 +71,9 @@ export LC_CTYPE=en_US.UTF-8
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# Export OS type
+export OS_TYPE=$(uname | tr '[:upper:]' '[:lower:]')
+
 # Disable Spring
 export DISABLE_SPRING=1
 
@@ -101,6 +104,10 @@ alias bi="bundle check || bundle install"
 alias ebashrc="emc ~/.bashrc"
 alias ezshrc="emc ~/.zshrc"
 alias ehosts="sudo vim /etc/hosts"
+
+if [[ $OS_TYPE = "linux" ]]; then
+  alias docker="sudo docker"
+fi
 
 # Folder's aliases
 alias projects="cd ~/projects"
@@ -133,4 +140,3 @@ if [[ $DISPLAY ]]; then
   [[ $- != *i* ]] && return
   [[ -z "$TMUX" ]] && exec tmux
 fi
-
