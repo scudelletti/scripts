@@ -109,10 +109,10 @@ alias projects="cd ~/projects"
 function some-company() {
   case "$1" in
   'a')
-    cd /Users/scudelletti/projects/some-company
+    cd ~/projects/some-company
   ;;
   'f')
-    cd /Users/scudelletti/projects/some-company/some-folder
+    cd ~/projects/some-company/some-folder
   ;;
   'help')
     echo "some-company help Show this help info"
@@ -120,11 +120,6 @@ function some-company() {
     echo "some-company f    Go to some-company/some-folder folder"
   ;;
   esac
-}
-
-# Copy Branch Name
-function cbn() {
-  echo -n $(git symbolic-ref --short -q HEAD) | pbcopy
 }
 
 # ASDF Scripts
@@ -139,11 +134,3 @@ if [[ $DISPLAY ]]; then
   [[ -z "$TMUX" ]] && exec tmux
 fi
 
-function tmuxp() {
-  local SESSION_NAME=$(basename "$PWD")
-
-  tmux new-session -s $SESSION_NAME -d -c $PWD && \
-  tmux set-environment -t $SESSION_NAME EMACS_SOCKET $SESSION_NAME && \
-  tmux split-window -t $SESSION_NAME:0 && \
-  tmux kill-pane -t $SESSION_NAME:0.0
-}
