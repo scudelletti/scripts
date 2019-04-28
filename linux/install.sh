@@ -38,3 +38,6 @@ ln -s ~/projects/scripts/linux/i3status
 
 # GTK Emacs Keybindings
 ln -s ~/projects/scripts/linux/gtk-3.0 ~/.config/gtk-3.0
+
+# Desktop Shortcuts
+cp ~/projects/scripts/linux/desktop_apps/* ~/.local/share/applications/
