@@ -1,0 +1,21 @@
+#!/bin/sh
+
+case "$1" in
+    '2k')
+        xrandr --output DP1 --mode 2560x1440 --right-of LVDS1
+        
+        ;;
+    '4k')
+        xrandr --output DP1 --mode 3840x2160 --right-of LVDS1
+        ;;
+    'auto')
+        xrandr --auto
+        ;;
+    'help')
+        echo "monitor 2k       set 2K resolution for external monitor"
+        echo "monitor 4k       set 4K resolution for external monitor"
+        echo "monitor auto     auto resolution"
+        echo "monitor help     show this help message"
+        ;;
+esac
+#
