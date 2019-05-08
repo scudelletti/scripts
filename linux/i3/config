@@ -117,8 +117,7 @@ workspace 6 output LVDS1
 workspace 7 output LVDS1
 workspace 8 output LVDS1
 workspace 9 output LVDS1
-workspace 0 output LVDS1
-
+workspace 10 output LVDS1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
