@@ -107,6 +107,7 @@ alias ehosts="sudo vim /etc/hosts"
 
 if [[ $OS_TYPE = "linux" ]]; then
   alias docker="sudo docker"
+  alias docker-compose="sudo docker-compose"
 fi
 
 # Folder's aliases
