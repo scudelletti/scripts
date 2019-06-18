@@ -368,9 +368,19 @@ This function is only necessary in window system."
 (load-file "~/.emacs.d/lisp/ds-run.el")
 (load-file "~/.emacs.d/lisp/ds-theme-switch.el")
 
-(ds-run-set-bin "MIX_ENV=test iex -S mix do test")
-(ds-run-set-suffix " --trace , halt")
 (ds-run-set-file-hook (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))
+
+(defun setup-ds-run-linux ()
+  (ds-run-set-bin "docker-compose -f docker-compose.dev.yml exec -e MIX_ENV=test umbrella_app /bin/bash -i -c \"iex -S mix do test")
+  (ds-run-set-suffix " --trace , halt\""))
+
+(defun setup-ds-run-osx ()
+  (ds-run-set-bin "MIX_ENV=test iex -S mix do test")
+  (ds-run-set-suffix " --trace , halt"))
+
+(if (equal (getenv "OS_TYPE") "linux")
+  (setup-ds-run-linux)
+  (setup-ds-run-osx))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
