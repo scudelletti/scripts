@@ -368,19 +368,32 @@ This function is only necessary in window system."
 (load-file "~/.emacs.d/lisp/ds-run.el")
 (load-file "~/.emacs.d/lisp/ds-theme-switch.el")
 
-(ds-run-set-file-hook (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))
+;; ds-run config
+;; setup ruby
+(setq ds-run-ruby-settings '(
+  (ds-run-var-bin . "bundle exec rspec")))
 
-(defun setup-ds-run-linux ()
-  (ds-run-set-bin "docker-compose -f docker-compose.dev.yml exec -e MIX_ENV=test umbrella_app /bin/bash -i -c \"iex -S mix do test")
-  (ds-run-set-suffix " --trace , halt\""))
+;; setup elixir for OSX
+(setq ds-run-elixir-settings-osx '(
+  (ds-run-var-bin . "MIX_ENV=test iex -S mix do test")
+  (ds-run-var-suffix ." --trace , halt")
+  (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))))
 
-(defun setup-ds-run-osx ()
-  (ds-run-set-bin "MIX_ENV=test iex -S mix do test")
-  (ds-run-set-suffix " --trace , halt"))
+;; setup elixir for Linux
+(setq ds-run-elixir-settings-linux '(
+  (ds-run-var-bin . "docker-compose -f docker-compose.dev.yml exec -e MIX_ENV=test umbrella_app /bin/bash -i -c \"iex -S mix do test")
+  (ds-run-var-suffix ." --trace , halt\"")
+  (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))))
 
+;; select elixir settings based on OS
 (if (equal (getenv "OS_TYPE") "linux")
-  (setup-ds-run-linux)
-  (setup-ds-run-osx))
+  (setq ds-run-elixir-settings ds-run-elixir-settings-linux)
+  (setq ds-run-elixir-settings ds-run-elixir-settings-osx))
+
+;; Configure ds-run for major modes
+(setq ds-run-settings `(
+  (ruby-mode . ,ds-run-ruby-settings)
+  (elixir-mode . ,ds-run-elixir-settings)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
