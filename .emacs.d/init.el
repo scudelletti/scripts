@@ -376,13 +376,13 @@ This function is only necessary in window system."
 ;; setup elixir for OSX
 (setq ds-run-elixir-settings-osx '(
   (ds-run-var-bin . "MIX_ENV=test iex -S mix do test")
-  (ds-run-var-suffix ." --trace , halt")
+  (ds-run-var-suffix ." --trace , run -e \"System.halt\"")
   (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))))
 
 ;; setup elixir for Linux
 (setq ds-run-elixir-settings-linux '(
   (ds-run-var-bin . "docker-compose -f docker-compose.dev.yml exec -e MIX_ENV=test umbrella_app /bin/bash -i -c \"iex -S mix do test")
-  (ds-run-var-suffix ." --trace , halt\"")
+  (ds-run-var-suffix ." --trace , run -e \"System.halt\"\"")
   (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps\/[[:word:],_,-,[:space:]]+\/" "" file)))))
 
 ;; select elixir settings based on OS
