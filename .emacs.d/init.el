@@ -95,6 +95,7 @@ This function is only necessary in window system."
   company-lsp
   elixir-mode
   enh-ruby-mode
+  erlang
   exec-path-from-shell
   flx-ido
   flycheck
