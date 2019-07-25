@@ -137,7 +137,6 @@ function some-company() {
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
 
-if [[ $DISPLAY ]]; then
-  [[ $- != *i* ]] && return
+if [[ $OS_TYPE = "linux" ]]; then
   [[ -z "$TMUX" ]] && exec tmux
 fi
