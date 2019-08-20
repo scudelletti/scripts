@@ -10,6 +10,7 @@ order += "path_exists VPN"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "disk /"
+order += "volume master"
 order += "battery 0"
 order += "cpu_temperature 0"
 order += "cpu_temperature 1"
@@ -82,4 +83,12 @@ cpu_temperature 1 {
 
 disk "/" {
         format = "%free"
+}
+
+volume master {
+        format = "V: %volume"
+        format_muted = " V: (muted) %volume"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
 }
