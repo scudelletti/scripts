@@ -15,6 +15,7 @@
 # brew cask install google-drive
 # brew cask install sublime
 # brew cask install docker
+# brew cask install kitty
 
 ##
 # Move ssh keys before running
@@ -47,6 +48,11 @@ ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/.tmux-powerlinerc
 ln -s ~/projects/scripts/macos/.profile
 ln -s ~/projects/scripts/macos/bin/
+
+# Setup config files
+mkdir -p .config
+cd ~/.config
+ln -s ~/projects/scripts/linux/kitty
 
 
 # Oh-My-ZSH

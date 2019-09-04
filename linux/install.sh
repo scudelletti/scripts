@@ -35,6 +35,7 @@ ln -s projects/scripts/linux/.xprofile
 cd ~/.config
 ln -s ~/projects/scripts/linux/i3
 ln -s ~/projects/scripts/linux/i3status
+ln -s ~/projects/scripts/linux/kitty
 
 # GTK Emacs Keybindings
 ln -s ~/projects/scripts/linux/gtk-3.0 ~/.config/gtk-3.0
