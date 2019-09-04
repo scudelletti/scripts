@@ -72,7 +72,7 @@ git_info() {
 __personal_hostname_ps1 () {
   local exit=$?
 
-  print "%{\e[33;1;30m%}[%m]%{\e[0m%}"
+  print "%{\e[2;37;40m%}[%m]%{\e[0m%}"
 
   return $exit
 }
