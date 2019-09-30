@@ -1,6 +1,9 @@
 #!/bin/sh
 
 case "$1" in
+    '1080')
+        xrandr --output VGA1 --left-of LVDS1
+	;;
     '2k')
         xrandr --output DP1 --mode 2560x1440 --right-of LVDS1
         ;;
