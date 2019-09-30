@@ -469,8 +469,11 @@ This function is only necessary in window system."
 ;; Remove trailing whitespace on Save                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq try-format-buffer
+      (lambda () (ignore-errors (lsp-format-buffer))))
+
+(add-hook 'before-save-hook try-format-buffer)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'before-save-hook 'lsp-format-buffer)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
