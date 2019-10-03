@@ -93,6 +93,7 @@ This function is only necessary in window system."
   coffee-mode
   company
   company-lsp
+  crystal-mode
   elixir-mode
   enh-ruby-mode
   exec-path-from-shell
@@ -388,9 +389,15 @@ This function is only necessary in window system."
   (setq ds-run-elixir-settings ds-run-elixir-settings-linux)
   (setq ds-run-elixir-settings ds-run-elixir-settings-osx))
 
+;; setup crystal
+(setq ds-run-crystal-settings '(
+  (ds-run-var-bin . "docker-compose run machine crystal spec")
+  (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps/" "" "apps/exercism/crystal/hello-world/spec/hello_world_spec.cr")))))
+
 ;; Configure ds-run for major modes
 (setq ds-run-settings `(
   (ruby-mode . ,ds-run-ruby-settings)
+  (crystal-mode . ,ds-run-crystal-settings)
   (elixir-mode . ,ds-run-elixir-settings)))
 
 
