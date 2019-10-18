@@ -392,7 +392,7 @@ This function is only necessary in window system."
 ;; setup crystal
 (setq ds-run-crystal-settings '(
   (ds-run-var-bin . "docker-compose run machine crystal spec")
-  (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps/" "" "apps/exercism/crystal/hello-world/spec/hello_world_spec.cr")))))
+  (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps/" "" file)))))
 
 ;; Configure ds-run for major modes
 (setq ds-run-settings `(
