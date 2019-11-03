@@ -130,6 +130,11 @@ function some-company() {
   esac
 }
 
+function allow-i3() {
+  export I3SOCK=$(ls /run/user/1000/i3/ipc-socket.*)
+  export DISPLAY=:0
+}
+
 # ASDF Scripts
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
