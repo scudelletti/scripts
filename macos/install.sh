@@ -1,8 +1,4 @@
 ##
-# Apps
-##
-
-##
 # Move ssh keys before running
 ##
 
