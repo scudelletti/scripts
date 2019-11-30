@@ -1,6 +1,7 @@
 [user]
   name = Diogo Scudelletti
   email = diogo@scudelletti.com
+  signingkey = BF74144D53C59D71EEEB69178D9E23A828418131
 
 [color]
   branch = auto
@@ -38,3 +39,6 @@
 
   # Show files ignored by git:
   ign = ls-files -o -i --exclude-standard
+
+[commit]
+  gpgsign = true
