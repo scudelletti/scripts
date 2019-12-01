@@ -86,6 +86,9 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # Set Elixir Editor
 export ELIXIR_EDITOR="emc +__LINE__ __FILE__"
 
+# Fix Commit Signing
+export GPG_TTY=$(tty)
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
