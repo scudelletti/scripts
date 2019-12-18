@@ -15,7 +15,7 @@ brew cask install kitty
 
 
 # Install apps
-brew install tmux reattach-to-user-namespace emacs
+brew install tmux reattach-to-user-namespace emacs gnupg pinentry-mac
 
 
 # Projects
@@ -34,6 +34,12 @@ ln -s ~/projects/scripts/macos/.bashrc
 ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/.profile
 ln -s ~/projects/scripts/macos/bin/
+
+
+# Setup GNUPG
+mkdir ~/.gnupg && chmod 700 ~/.gnupg
+ln -s ~/projects/scripts/gpg-agent.conf
+
 
 # Setup config files
 mkdir -p .config
