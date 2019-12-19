@@ -145,6 +145,9 @@ function allow-i3() {
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
 
+# Use GPG Agent as SSH Agent
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
 if [[ $OS_TYPE = "linux" ]]; then
   [[ -z "$TMUX" ]] && exec tmux
 fi
