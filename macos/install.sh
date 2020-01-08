@@ -41,6 +41,10 @@ mkdir ~/.gnupg && chmod 700 ~/.gnupg
 ln -s ~/projects/scripts/gpg-agent.conf
 
 
+# Setup PinEntry GUI
+unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinentry
+
+
 # Setup config files
 mkdir -p .config
 cd ~/.config

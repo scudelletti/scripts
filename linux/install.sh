@@ -45,3 +45,6 @@ cp ~/projects/scripts/linux/desktop_apps/* ~/.local/share/applications/
 
 # Set default browser
 xdg-settings set default-web-browser brave.desktop
+
+# Setup Pinentry
+sudo ln -s $(which /usr/bin/pinentry-gnome3) /usr/local/bin/pinentry
