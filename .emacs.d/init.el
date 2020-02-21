@@ -329,8 +329,6 @@ This function is only necessary in window system."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(js-indent-level 2)
  '(list-matching-lines-default-context-lines 1)
- '(lsp-ui-doc-enable nil)
- '(lsp-ui-sideline-enable nil)
  '(magit-diff-use-overlays nil)
  '(ruby-align-to-stmt-keywords t)
  '(scroll-bar-mode nil)
@@ -405,12 +403,23 @@ This function is only necessary in window system."
 ;; LSP-Mode - Configuration                                         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq lsp-prefer-flymake nil)
+(setq lsp-keymap-prefix "C-c C-y")
 
-;; ;; Elixir
+;; Elixir
 (setq lsp-clients-elixir-server-executable
       "~/projects/others/elixir-ls/release/language_server.sh")
+
+;; Disable Docs on right side
+(add-hook 'elixir-mode-hook (lambda () (lsp-ui-doc-mode -1)))
+
+;; Disable Flyckeck errors on right side
+(add-hook 'elixir-mode-hook (lambda () (lsp-ui-sideline-mode -1)))
+
 (add-hook 'elixir-mode-hook #'lsp)
+
+;; Enable Which-Key integration
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -423,8 +432,6 @@ This function is only necessary in window system."
 (eval-after-load 'flycheck
   '(flycheck-credo-setup))
 
-(require 'lsp-ui-flycheck)
-(flycheck-add-next-checker 'lsp-ui '(warning . elixir-credo))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Themes                                                           ;;
