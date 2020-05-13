@@ -37,7 +37,7 @@ ln -s ~/projects/scripts/macos/bin/
 
 
 # Setup GNUPG
-mkdir ~/.gnupg && chmod 700 ~/.gnupg
+mkdir ~/.gnupg && chmod 700 ~/.gnupg && cd ~/.gnupg
 ln -s ~/projects/scripts/gpg-agent.conf
 
 
