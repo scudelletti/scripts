@@ -99,7 +99,6 @@ This function is only necessary in window system."
   exec-path-from-shell
   flx-ido
   flycheck
-  flycheck-credo
   haml-mode
   helm-ag
   ido-vertical-mode
@@ -113,7 +112,6 @@ This function is only necessary in window system."
   phi-search
   projectile
   rainbow-delimiters
-  restclient
   rspec-mode
   sass-mode
   undo-tree
@@ -420,17 +418,6 @@ This function is only necessary in window system."
 ;; Enable Which-Key integration
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flycheck - Credo                                                 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'flycheck-credo)
-(require 'flycheck)
-
-(eval-after-load 'flycheck
-  '(flycheck-credo-setup))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
