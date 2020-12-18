@@ -1,3 +1,7 @@
+# Enable Autocompletion
+autoload -U compinit
+compinit
+
 # Load theme
 source $HOME/projects/scripts/zsh_theme/scudelletti.zsh
 
