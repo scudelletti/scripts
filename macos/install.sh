@@ -2,14 +2,6 @@
 # Move ssh keys before running
 ##
 
-# Brew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-
-#rbenv
-brew update
-
-
 # Install Kitty
 brew cask install kitty
 
@@ -34,6 +26,11 @@ ln -s ~/projects/scripts/macos/.tmux.conf
 ln -s ~/projects/scripts/macos/bin/
 
 
+# Setup ZSH
+rm .zshrc
+ln -s ~/projects/scripts/.zshrc
+
+
 # Setup GNUPG
 mkdir ~/.gnupg && chmod 700 ~/.gnupg && cd ~/.gnupg
 ln -s ~/projects/scripts/gpg-agent.conf
@@ -47,14 +44,6 @@ unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinen
 mkdir ~/.config
 cd ~/.config
 ln -s ~/projects/scripts/linux/kitty
-
-
-# Oh-My-ZSH
-brew install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-cd ~/
-rm .zshrc
-ln -s ~/projects/scripts/macos/.zshrc
 
 
 # Setup Emacs
