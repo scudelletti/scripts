@@ -30,9 +30,7 @@ cd ~/
 ln -s ~/projects/scripts/.gitconfig
 ln -s ~/projects/scripts/.gitignore.global .gitignore
 ln -s ~/projects/scripts/.asdfrc
-ln -s ~/projects/scripts/macos/.bashrc
 ln -s ~/projects/scripts/macos/.tmux.conf
-ln -s ~/projects/scripts/macos/.profile
 ln -s ~/projects/scripts/macos/bin/
 
 
@@ -46,7 +44,7 @@ unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinen
 
 
 # Setup config files
-mkdir -p .config
+mkdir ~/.config
 cd ~/.config
 ln -s ~/projects/scripts/linux/kitty
 
@@ -69,11 +67,11 @@ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/loca
 
 
 # asdf - Check latest version at https://github.com/asdf-vm/asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.5
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 
 
 # Elixir-LS
 cd ~/projects/others
-git clone https://github.com/JakeBecker/elixir-ls.git
+git clone https://github.com/elixir-lsp/elixir-ls.git
 cd elixir-ls
 mix do deps.get, compile, elixir_ls.release
