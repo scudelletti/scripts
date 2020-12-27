@@ -125,3 +125,5 @@ local exit=$?
 
 PROMPT=$'$(__personal_hostname_ps1)  $(__personal_last_exit_code_ps1)  $(__personal_ruby_version_ps1)  $(__personal_git_ps1)\
 $(__personal_username_ps1) $(__personal_path_ps1) $ '
+# Remove Right Prompt
+RPROMPT=''
