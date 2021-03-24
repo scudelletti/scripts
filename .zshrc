@@ -2,6 +2,10 @@
 autoload -U compinit
 compinit
 
+# Navigate words like bash when using word navigation such as meta+b
+autoload -U select-word-style
+select-word-style bash
+
 # Load theme
 source $HOME/projects/scripts/zsh_theme/scudelletti.zsh
 
