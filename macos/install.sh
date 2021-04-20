@@ -22,8 +22,8 @@ cd ~/
 ln -s ~/projects/scripts/.gitconfig
 ln -s ~/projects/scripts/.gitignore.global .gitignore
 ln -s ~/projects/scripts/.asdfrc
-ln -s ~/projects/scripts/macos/.tmux.conf
-ln -s ~/projects/scripts/macos/bin/
+ln -s ~/projects/scripts/.tmux.conf
+ln -s ~/projects/scripts/bin/
 
 
 # Setup ZSH

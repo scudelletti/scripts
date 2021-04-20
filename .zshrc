@@ -72,6 +72,15 @@ function tmuxp () {
   tmux split-window -t $SESSION_NAME:0 && tmux kill-pane -t $SESSION_NAME:0.0
 }
 
+function port_listening() {
+  lsof -i :$1 | grep 'LISTEN'
+}
+
+# Copy Branch Name
+function cbn() {
+  echo -n $(git symbolic-ref --short -q HEAD) | pbcopy
+}
+
 function allow-i3() {
   export I3SOCK=$(ls /run/user/1000/i3/ipc-socket.*)
   export DISPLAY=:0
