@@ -6,4 +6,4 @@
 .emacs.d/projectile.cache
 .emacs.d/.lsp-session-v1
 .DS_Store
-macos/bin/transient/
+bin/transient/
