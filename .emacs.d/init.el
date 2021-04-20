@@ -91,7 +91,6 @@ This function is only necessary in window system."
   clojure-mode
   coffee-mode
   company
-  company-lsp
   crystal-mode
   elixir-mode
   enh-ruby-mode
@@ -321,13 +320,15 @@ This function is only necessary in window system."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(grep-highlight-matches (quote auto))
+ '(grep-highlight-matches 'auto)
  '(ido-enable-flex-matching t)
- '(ido-mode (quote both) nil (ido))
- '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(ido-mode 'both nil (ido))
+ '(initial-frame-alist '((fullscreen . maximized)))
  '(js-indent-level 2)
  '(list-matching-lines-default-context-lines 1)
  '(magit-diff-use-overlays nil)
+ '(package-selected-packages
+   '(lsp-haskell zoom-window yasnippet yaml-mode which-key wgrep-ag web-mode undo-tree sass-mode rspec-mode rainbow-delimiters projectile phi-search multiple-cursors monokai-theme moe-theme magit lsp-ui json-mode ido-vertical-mode helm-ag flycheck flx-ido exec-path-from-shell enh-ruby-mode elixir-mode crystal-mode company coffee-mode cider browse-kill-ring anzu ag))
  '(ruby-align-to-stmt-keywords t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -640,3 +641,9 @@ This function is only necessary in window system."
 
 (if (display-graphic-p)
   (global-set-key (kbd "C-z") nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
