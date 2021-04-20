@@ -102,6 +102,7 @@ This function is only necessary in window system."
   helm-ag
   ido-vertical-mode
   json-mode
+  lsp-haskell
   lsp-mode
   lsp-ui
   magit
@@ -417,6 +418,12 @@ This function is only necessary in window system."
 ;; Enable Which-Key integration
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+
+;; Haskell
+(setq lsp-haskell-server-path
+      "~/bin/haskell-language-server-macOS-8.6.4")
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
