@@ -421,7 +421,7 @@ This function is only necessary in window system."
 
 ;; Haskell
 (setq lsp-haskell-server-path
-      "~/bin/haskell-language-server-macOS-8.6.4")
+      "~/bin/transient/haskell-language-server-macOS-8.6.4")
 (add-hook 'haskell-mode-hook #'lsp)
 (add-hook 'haskell-literate-mode-hook #'lsp)
 

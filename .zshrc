@@ -48,38 +48,14 @@ export GPG_TTY=$(tty)
 
 # Aliases
 alias tmuxa="tmux a || tmux"
-alias got="git"
 alias ll="ls -lha"
 alias be="bundle exec"
 alias bi="bundle check || bundle install"
-alias ebashrc="emc ~/.bashrc"
-alias ezshrc="emc ~/.zshrc"
-alias ehosts="sudo vim /etc/hosts"
 
 if [[ $OS_TYPE = "linux" ]]; then
   alias docker="sudo docker"
   alias docker-compose="sudo docker-compose"
 fi
-
-# Folder's aliases
-alias projects="cd ~/projects"
-
-# Personal Functions
-function some-company() {
-  case "$1" in
-  'a')
-    cd ~/projects/some-company
-  ;;
-  'f')
-    cd ~/projects/some-company/some-folder
-  ;;
-  'help')
-    echo "some-company help Show this help info"
-    echo "some-company      Go to some-company folder"
-    echo "some-company f    Go to some-company/some-folder folder"
-  ;;
-  esac
-}
 
 # Create new tmux session with directory as the session's name
 function tmuxp () {
@@ -106,6 +82,9 @@ function allow-i3() {
 
 # Add ~/bin to Path
 PATH=$PATH:$HOME/bin
+
+# Add ~/bin/transient to Path
+PATH=$PATH:$HOME/bin/transient
 
 # Use GPG Agent as SSH Agent
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)

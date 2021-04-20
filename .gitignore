@@ -4,4 +4,6 @@
 .emacs.d/ido.last
 .emacs.d/projectile-bookmarks.eld
 .emacs.d/projectile.cache
+.emacs.d/.lsp-session-v1
 .DS_Store
+macos/bin/transient/
