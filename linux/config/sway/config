@@ -20,6 +20,10 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu albert show
 
+# Start Applications
+exec albert
+exec copyqx
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
