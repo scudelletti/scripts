@@ -43,7 +43,7 @@ unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinen
 # Setup config files
 mkdir ~/.config
 cd ~/.config
-ln -s ~/projects/scripts/linux/kitty
+ln -s ~/projects/scripts/linux/config/kitty
 
 
 # Setup Emacs
