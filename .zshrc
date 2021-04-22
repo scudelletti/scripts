@@ -99,7 +99,7 @@ PATH=$PATH:$HOME/bin/transient
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 if [[ $OS_TYPE = "linux" ]]; then
-  [[ -z "$TMUX" ]] && exec tmux
+  [[ -z "$TMUX" ]] && [[ -z "$DISPLAY" ]] && exec tmux
 fi
 
 return 0
