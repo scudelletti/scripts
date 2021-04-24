@@ -81,11 +81,6 @@ function cbn() {
   echo -n $(git symbolic-ref --short -q HEAD) | pbcopy
 }
 
-function allow-i3() {
-  export I3SOCK=$(ls /run/user/1000/i3/ipc-socket.*)
-  export DISPLAY=:0
-}
-
 # ASDF Scripts
 . $HOME/.asdf/asdf.sh
 
@@ -102,7 +97,7 @@ if [[ $OS_TYPE = "linux" ]]; then
   # Fix Firefox in wayland
   export MOZ_ENABLE_WAYLAND=1
 
-  [[ -z "$TMUX" ]] && exec tmux
+  [ -z "$TMUX" ] && [ $TERM = "xterm-kitty" ] && exec tmux
 fi
 
 return 0
