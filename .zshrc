@@ -99,7 +99,10 @@ PATH=$PATH:$HOME/bin/transient
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 if [[ $OS_TYPE = "linux" ]]; then
-  [[ -z "$TMUX" ]] && [[ -z "$DISPLAY" ]] && exec tmux
+  # Fix Firefox in wayland
+  export MOZ_ENABLE_WAYLAND=1
+
+  [[ -z "$TMUX" ]] && exec tmux
 fi
 
 return 0
