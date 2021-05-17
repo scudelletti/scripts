@@ -112,6 +112,7 @@ This function is only necessary in window system."
   projectile
   rainbow-delimiters
   rspec-mode
+  rust-mode
   sass-mode
   undo-tree
   web-mode
@@ -425,6 +426,9 @@ This function is only necessary in window system."
       "~/bin/transient/haskell-language-server-macOS-8.6.4")
 (add-hook 'haskell-mode-hook #'lsp)
 (add-hook 'haskell-literate-mode-hook #'lsp)
+
+;; Rust
+(add-hook 'rust-mode-hook #'lsp)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
