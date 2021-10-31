@@ -99,6 +99,9 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     bindsym XF86AudioMute        exec pactl set-sink-mute 0 toggle
     bindsym XF86AudioMicMute     exec pactl set-source-mute 0 toggle
 
+    # CopyQ Shortcut
+    bindsym $mod+Shift+v exec copyq toggle
+
 #
 # Moving around:
 #
