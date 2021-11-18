@@ -42,3 +42,16 @@
 
 [commit]
   gpgsign = true
+
+# Delta Diff Pager
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+
+[delta]
+  navigate = true
+
+[interactive]
+  diffFilter = delta --color-only
