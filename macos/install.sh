@@ -22,9 +22,10 @@ ln -s ~/projects/scripts/.tmux.conf
 ln -s ~/projects/scripts/bin/
 
 
-# Setup ZSH
-rm .zshrc
-ln -s ~/projects/scripts/.zshrc
+# Setup Fish
+mkdir -p ~/.config
+cd ~/.config
+ln -s ~/projects/scripts/linux/config/fish
 
 
 # Setup GNUPG
@@ -37,7 +38,7 @@ unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinen
 
 
 # Setup config files
-mkdir ~/.config
+mkdir -p ~/.config
 cd ~/.config
 ln -s ~/projects/scripts/linux/config/kitty
 
@@ -56,6 +57,7 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 
 
 # Elixir-LS
+mkdir -p ~/projects/others
 cd ~/projects/others
 git clone https://github.com/elixir-lsp/elixir-ls.git
 cd elixir-ls
