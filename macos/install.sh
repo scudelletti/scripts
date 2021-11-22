@@ -2,12 +2,8 @@
 # Move ssh keys before running
 ##
 
-# Install Kitty
-brew cask install kitty
-
-
 # Install apps
-brew install tmux reattach-to-user-namespace emacs gnupg pinentry-mac
+brew install kitty fish tmux reattach-to-user-namespace emacs gnupg pinentry-mac
 
 
 # Projects
