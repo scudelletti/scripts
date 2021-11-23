@@ -3,7 +3,7 @@
 ##
 
 # Install apps
-brew install kitty fish tmux reattach-to-user-namespace emacs gnupg pinentry-mac
+brew install kitty fish tmux reattach-to-user-namespace emacs gnupg pinentry-mac ag delta
 
 
 # Projects
