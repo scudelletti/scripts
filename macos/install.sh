@@ -5,6 +5,8 @@
 # Install apps
 brew install kitty fish tmux reattach-to-user-namespace emacs gnupg pinentry-mac ag git-delta
 
+# Setup PinEntry GUI
+unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinentry
 
 # Projects
 mkdir ~/projects
@@ -26,15 +28,13 @@ ln -s ~/projects/scripts/bin/
 mkdir -p ~/.config
 cd ~/.config
 ln -s ~/projects/scripts/linux/config/fish
+echo /usr/local/bin/fish | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish
 
 
 # Setup GNUPG
 mkdir ~/.gnupg && chmod 700 ~/.gnupg && cd ~/.gnupg
 ln -s ~/projects/scripts/gpg-agent.conf
-
-
-# Setup PinEntry GUI
-unlink /usr/local/bin/pinentry; ln -s $(which pinentry-mac) /usr/local/bin/pinentry
 
 
 # Setup config files
