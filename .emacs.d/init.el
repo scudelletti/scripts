@@ -412,6 +412,9 @@ This function is only necessary in window system."
 ;; Disable Docs on right side
 (add-hook 'elixir-mode-hook (lambda () (lsp-ui-doc-mode -1)))
 
+;; Disable Lens
+(setq lsp-lens-enable nil)
+
 ;; Disable Flyckeck errors on right side
 (add-hook 'elixir-mode-hook (lambda () (lsp-ui-sideline-mode -1)))
 
