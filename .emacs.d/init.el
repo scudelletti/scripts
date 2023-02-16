@@ -413,9 +413,6 @@ This function is only necessary in window system."
 (setq lsp-keymap-prefix "C-c C-y")
 
 ;; Elixir
-(setq lsp-elixir-server-command
-      '("~/projects/others/elixir-ls/release/language_server.sh"))
-
 ;; Disable Docs on right side
 (add-hook 'elixir-mode-hook (lambda () (lsp-ui-doc-mode -1)))
 
