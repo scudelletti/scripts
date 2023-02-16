@@ -4,3 +4,6 @@ set -gx LC_CTYPE en_US.UTF-8
 
 # Define default editor
 set -gx EDITOR "emacs -nw"
+
+# Define SHELL Environment Variable
+set -gx SHELL (which fish)
