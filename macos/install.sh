@@ -23,7 +23,6 @@ ln -s ~/projects/scripts/.asdfrc
 ln -s ~/projects/scripts/.tmux.conf
 ln -s ~/projects/scripts/bin/
 
-
 # Setup Fish
 mkdir -p ~/.config
 cd ~/.config
@@ -50,6 +49,12 @@ ln -s ~/projects/scripts/.emacs.d
 
 # Sublime CLI
 ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+
+
+# Setup VSCode
+cd "/Users/scudelletti/Library/Application Support/Code/User/"
+ln -s "~/projects/scripts/vscode/settings.json"
+ln -s "~/projects/scripts/vscode/keybindings.json"
 
 
 # asdf - Check latest version at https://github.com/asdf-vm/asdf
