@@ -2,7 +2,6 @@
     "workbench.colorTheme": "Default High Contrast",
     "telemetry.telemetryLevel": "off",
     "editor.tabSize": 2,
-    "window.zoomLevel": 2,
     "editor.cursorStyle": "block",
     "editor.autoClosingQuotes": "never",
     "editor.autoClosingBrackets": "never",
@@ -17,5 +16,7 @@
         "PATH": "~/.asdf/bin:$PATH"
     },
     "editor.guides.bracketPairs": true,
-    "editor.guides.indentation": false
+    "editor.guides.indentation": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "window.zoomLevel": -1
 }
