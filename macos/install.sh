@@ -53,8 +53,9 @@ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/loca
 
 # Setup VSCode
 cd "/Users/scudelletti/Library/Application Support/Code/User/"
-ln -s "~/projects/scripts/vscode/settings.json"
-ln -s "~/projects/scripts/vscode/keybindings.json"
+ln -s ~/projects/scripts/vscode/settings.json
+ln -s ~/projects/scripts/vscode/keybindings.json
+ln -s ~/projects/scripts/vscode/settings.json
 
 
 # asdf - Check latest version at https://github.com/asdf-vm/asdf
