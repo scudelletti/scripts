@@ -19,5 +19,30 @@
   {
     "key": "cmd+-",
     "command": "editor.action.fontZoomOut"
+  },
+  {
+    "key": "alt+f",
+    "command": "cursorWordEndRight",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+right",
+    "command": "-cursorWordEndRight",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+right",
+    "command": "cursorWordEndRight",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+b",
+    "command": "cursorWordLeft",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+d",
+    "command": "deleteWordRight",
+    "when": "textInputFocus && !editorReadonly"
   }
 ]
