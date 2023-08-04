@@ -87,17 +87,12 @@ This function is only necessary in window system."
   ag
   anzu
   browse-kill-ring
-  cider
-  clojure-mode
-  coffee-mode
   company
-  crystal-mode
   elixir-mode
   enh-ruby-mode
   exec-path-from-shell
   flx-ido
   flycheck
-  haml-mode
   helm-ag
   ido-vertical-mode
   json-mode
@@ -336,7 +331,7 @@ This function is only necessary in window system."
  '(list-matching-lines-default-context-lines 1)
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
-   '(lsp-haskell zoom-window yasnippet yaml-mode which-key wgrep-ag web-mode undo-tree sass-mode rspec-mode rainbow-delimiters projectile phi-search multiple-cursors monokai-theme moe-theme magit lsp-ui json-mode ido-vertical-mode helm-ag flycheck flx-ido exec-path-from-shell enh-ruby-mode elixir-mode crystal-mode company coffee-mode cider browse-kill-ring anzu ag))
+   '(lsp-haskell zoom-window yasnippet yaml-mode which-key wgrep-ag web-mode undo-tree sass-mode rspec-mode rainbow-delimiters projectile phi-search multiple-cursors monokai-theme moe-theme magit lsp-ui json-mode ido-vertical-mode helm-ag flycheck flx-ido exec-path-from-shell enh-ruby-mode elixir-mode company cider browse-kill-ring anzu ag))
  '(ruby-align-to-stmt-keywords t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -394,15 +389,9 @@ This function is only necessary in window system."
   (setq ds-run-elixir-settings ds-run-elixir-settings-linux)
   (setq ds-run-elixir-settings ds-run-elixir-settings-osx))
 
-;; setup crystal
-(setq ds-run-crystal-settings '(
-  (ds-run-var-bin . "docker-compose run machine crystal spec")
-  (ds-run-var-file-hook . (lambda (file) (replace-regexp-in-string "^apps/" "" file)))))
-
 ;; Configure ds-run for major modes
 (setq ds-run-settings `(
   (ruby-mode . ,ds-run-ruby-settings)
-  (crystal-mode . ,ds-run-crystal-settings)
   (elixir-mode . ,ds-run-elixir-settings)))
 
 
