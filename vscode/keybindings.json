@@ -6,7 +6,7 @@
   },
   {
     "key": "cmd+-",
-    "command": "-workbench.action.zoomOut"
+    "command": "-workbench.action.zoomOut",
   },
   {
     "key": "cmd+=",
@@ -14,11 +14,13 @@
   },
   {
     "key": "cmd+=",
-    "command": "editor.action.fontZoomIn"
+    "command": "editor.action.fontZoomIn",
+    "when": "editorTextFocus"
   },
   {
     "key": "cmd+-",
-    "command": "editor.action.fontZoomOut"
+    "command": "editor.action.fontZoomOut",
+    "when": "editorTextFocus"
   },
   {
     "key": "alt+f",
@@ -44,5 +46,47 @@
     "key": "alt+d",
     "command": "deleteWordRight",
     "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+    "when": "inQuickOpen && inViewsPicker"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpenView"
+  },
+  {
+    "key": "cmd+=",
+    "command": "ds-commons.terminal.action.zoomIn",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+x o",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "ctrl+x 2",
+    "command": "workbench.action.splitEditorDown"
+  },
+  {
+    "key": "cmd+k cmd+\\",
+    "command": "-workbench.action.splitEditorDown"
+  },
+  {
+    "key": "ctrl+x 3",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "cmd+\\",
+    "command": "-workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+x 0",
+    "command": "workbench.action.closeEditorsAndGroup"
+  },
+  {
+    "key": "ctrl+x 1",
+    "command": "workbench.action.closeEditorsInOtherGroups"
   }
 ]
