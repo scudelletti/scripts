@@ -1,0 +1,88 @@
+modmap:
+  - name: Global
+    remap:
+      CapsLock: Ctrl_L
+      Super_L: Alt_L
+      Alt_L: Super_L
+      Ctrl_R:
+        alone: macro
+        held: Ctrl_R
+default_mode: default
+keymap:
+  - mode: default
+    remap:
+      Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
+      Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+  - mode: vim_insert
+    remap:
+      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
+      Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      Esc: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
+  - mode: vim_normal
+    remap:
+      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
+      Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      # Insert
+      i: [{set_mode: vim_insert}, {launch: ["bash", "-c", "notify-send '[INSERT]'"]}]
+      shift-a: [End, {set_mode: vim_insert}, {launch: ["bash", "-c", "notify-send '[INSERT]'"]}]
+      # Delete
+      x: Delete
+      d: 
+        remap:
+          d: [Home, Shift-End, Delete, Delete]
+        timeout_millis: 200
+      # Chars
+      h: {with_mark: Left}
+      l: {with_mark: Right}
+      k: {with_mark: Up}
+      j: {with_mark: Down}
+      # Words
+      b: {with_mark: C-Left}
+      e: {with_mark: C-Right}
+      # Line
+      0: {with_mark: Home}
+      Shift-4: {with_mark: Shift-End}
+      # Selection
+      v: {set_mark: true}
+      Esc: {set_mark: false}
+      # Clipboard
+      C-c: [Copy, {set_mark: false}]
+      C-x: [Cut, {set_mark: false}]
+
+  - mode: emacs
+    remap:
+      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
+      Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      # Chars
+      C-f: {with_mark: Right}
+      C-b: {with_mark: Left}
+      C-p: {with_mark: Up}
+      C-n: {with_mark: Down}
+      # Words
+      M-f: {with_mark: C-Right}
+      M-b: {with_mark: C-Left}
+      # Line
+      C-a: {with_mark: Home}
+      C-e: {with_mark: End}
+      # Deletion
+      C-d: [Delete, {set_mark: false}]
+      M-d: [C-Delete, {set_mark: false}]
+      M-Backspace: [C-Backspace, {set_mark: false}]
+      C-k: [Shift-End, Cut, {set_mark: false}]
+      # Clipboard
+      C-w: [Cut, {set_mark: false}]
+      C-y: Paste
+      M-w: Copy
+      # Commands
+      C-Space: {set_mark: true}
+      C-g: {set_mark: false}
+      C-s: C-f
+      C-slash: [Undo, {set_mark: false}]
+      C-x:
+        remap:
+          h: [C-a, {set_mark: true}]
+          C-c: C-q
+          C-s: C-s
