@@ -27,11 +27,11 @@ This function is only necessary in window system."
 
 (defvar pasteboard-copy-cmd (cond
   ((executable-find "pbcopy") "pbcopy")
-   ((executable-find "xclip") "xclip -selection clipboard -i &> /dev/null")))
+   ((executable-find "wl-copy") "wl-copy")))
 
 (defvar pasteboard-paste-cmd (cond
   ((executable-find "pbcopy") "pbcopy")
-  ((executable-find "xclip") "xclip -selection clipboard -o")))
+  ((executable-find "wl-paste") "wl-paste --no-newline")))
 
 (defun pasteboard-copy()
   "Copy region to OS X system pasteboard."
