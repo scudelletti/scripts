@@ -7,3 +7,6 @@ set -gx EDITOR "emacs -nw"
 
 # Define SHELL Environment Variable
 set -gx SHELL (which fish)
+
+# Disable greeting message
+set fish_greeting
