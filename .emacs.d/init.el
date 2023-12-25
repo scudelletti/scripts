@@ -27,11 +27,11 @@ This function is only necessary in window system."
 
 (defvar pasteboard-copy-cmd (cond
   ((executable-find "pbcopy") "pbcopy")
-   ((executable-find "wl-copy") "wl-copy")))
+   ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -i")))
 
 (defvar pasteboard-paste-cmd (cond
   ((executable-find "pbcopy") "pbcopy")
-  ((executable-find "wl-paste") "wl-paste --no-newline")))
+  ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -p")))
 
 (defun pasteboard-copy()
   "Copy region to OS X system pasteboard."
