@@ -1,13 +1,12 @@
 #!/bin/sh
 
-DEFAULT_COMMAND=""
-
 read -p "TOOLBOX: " PTOOLBOX_TYPE
 read -p "CONTAINER: " PTOOLBOX_CONTAINER_NAME
 
 #PTOOLBOX_TYPE="toolbox"
 #PTOOLBOX_CONTAINER_NAME=""
 
+DEFAULT_COMMAND=""
 case "$PTOOLBOX_TYPE" in
    "") DEFAULT_COMMAND=""
    ;;
@@ -23,4 +22,10 @@ case "$PTOOLBOX_TYPE" in
    ;;
 esac
 
-tmux set-option default-command "$DEFAULT_COMMAND"
+# Use tmux from host machine when inside a toolbox container
+COMMAND_PREFIX=""
+if [ -n "$CONTAINER_ID" ]; then
+  COMMAND_PREFIX="distrobox-host-exec"
+fi
+
+$COMMAND_PREFIX tmux set-option default-command "$DEFAULT_COMMAND"
