@@ -1,7 +1,0 @@
-<!-- Copy this file to /Users/<username>/Library/Application Support/Sublime Text 3/Packages/ruby_debugger.sublime-snippet -->
-<snippet>
-  <content><![CDATA[
-console.log($1);
-]]></content>
-  <tabTrigger>cs</tabTrigger>
-</snippet>

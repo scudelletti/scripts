@@ -60,11 +60,3 @@ ln -s ~/projects/scripts/vscode/settings.json
 
 # asdf - Check latest version at https://github.com/asdf-vm/asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
-
-
-# Elixir-LS
-mkdir -p ~/projects/others
-cd ~/projects/others
-git clone https://github.com/elixir-lsp/elixir-ls.git
-cd elixir-ls
-mix do deps.get, compile, elixir_ls.release
