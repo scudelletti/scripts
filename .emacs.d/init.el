@@ -90,6 +90,7 @@ This function is only necessary in window system."
   company
   elixir-mode
   enh-ruby-mode
+  evil
   exec-path-from-shell
   flx-ido
   flycheck
@@ -111,9 +112,9 @@ This function is only necessary in window system."
   sass-mode
   undo-tree
   web-mode
-  which-key
   wgrep
   wgrep-ag
+  which-key
   yaml-mode
   yasnippet
   zoom-window))
@@ -618,6 +619,12 @@ This function is only necessary in window system."
 
 (which-key-mode)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Evil Mode                                                        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'evil)
+(evil-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Keybindings                                                      ;;
