@@ -29,7 +29,7 @@ keymap:
       shift-a: [End, {set_mode: vim_insert}, {launch: ["bash", "-c", "notify-send '[INSERT]'"]}]
       # Delete
       x: Delete
-      d: 
+      d:
         remap:
           d: [Home, Shift-End, Delete, Delete]
         timeout_millis: 200
@@ -48,8 +48,12 @@ keymap:
       v: {set_mark: true}
       Esc: {set_mark: false}
       # Clipboard
+      y: [Copy, {set_mark: false}]
+      p: Paste
       C-c: [Copy, {set_mark: false}]
       C-x: [Cut, {set_mark: false}]
+      # Undo
+      u: [Undo, {set_mark: false}]
 
   - mode: emacs
     remap:
