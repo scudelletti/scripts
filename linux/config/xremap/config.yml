@@ -1,12 +1,17 @@
 modmap:
-  - name: Global
+  - name: Swap Left Super/Alt
+    device:
+      not: ['ZSA Technology Labs ErgoDox EZ', 'Input:Club Infinity Ergodox (QMK)']
     remap:
       CapsLock: Ctrl_L
       Super_L: Alt_L
       Alt_L: Super_L
+  - name: Map Ctrl_R to Macro when pressed alone
+    remap:
       Ctrl_R:
         alone: macro
         held: Ctrl_R
+
 default_mode: default
 keymap:
   - mode: default
