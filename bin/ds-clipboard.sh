@@ -3,7 +3,7 @@
 while getopts ":ip" opt; do
   case $opt in
     i)
-      read input_text
+      input_text=$(</dev/stdin)
       flatpak run com.github.hluk.copyq copy "$input_text"
       flatpak run com.github.hluk.copyq add "$input_text"
       ;;
