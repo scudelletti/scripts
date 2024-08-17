@@ -95,3 +95,10 @@ keymap:
           h: [C-a, {set_mark: true}]
           C-c: C-q
           C-s: C-s
+      # Extra
+      Super-w: C-w
+      Super-a: [C-a, {set_mark: true}]
+      Super-x: [Cut, {set_mark: false}]
+      Super-c: Copy
+      Super-v: Paste
+      Super-f: C-f
