@@ -18,6 +18,8 @@ keymap:
     remap:
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+
+  # Vim modes
   - mode: vim_insert
     remap:
       macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
