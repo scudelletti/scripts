@@ -105,6 +105,7 @@ This function is only necessary in window system."
   monokai-theme
   multiple-cursors
   phi-search
+  polymode
   projectile
   rainbow-delimiters
   rspec-mode
@@ -536,6 +537,26 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Polymode - support for multiple modes                            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package polymode
+  :ensure t
+  :mode ("\.ex$" . poly-elixir-heex-mode)
+  :config
+  (define-hostmode poly-elixir-heex-hostmode :mode 'elixir-mode)
+  (define-innermode poly-elixir-heex-expr-innermode
+    :mode 'web-mode
+    :head-matcher (rx "~H" (= 3 (char "\"'")) (* (any space)))
+    :tail-matcher (rx (= 3 (char "\"'")))
+    :head-mode 'host
+    :tail-mode 'host)
+  (define-polymode poly-elixir-heex-mode
+    :hostmode 'poly-elixir-heex-hostmode
+    :innermodes '(poly-elixir-heex-expr-innermode)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Undo Tree                                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -562,6 +583,19 @@ This function is only necessary in window system."
       ,(rx (or "}" "]" "end"))
       ,(rx (or "#" "=begin"))
       ruby-forward-sexp nil)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; HideShow Configuration for HTML                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(eval-after-load "hideshow"
+  '(add-to-list 'hs-special-modes-alist
+    `(web-mode
+      "{\\|<[^/>]+?"
+      "}\\|</[^/>]*[^/]>"
+      "<!--"
+      web-mode-forward-sexp nil)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
