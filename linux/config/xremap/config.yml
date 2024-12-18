@@ -125,3 +125,8 @@ keymap:
       Super-v: Paste
       Super-z: Undo
       Super-Shift-z: Redo
+      # Extra
+      Super-f: Ctrl-f
+      Ctrl-k: [Shift-End, Delete, {set_mark: false}]
+      M-Backspace: Ctrl-Backspace
+
