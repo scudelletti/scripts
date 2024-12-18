@@ -18,17 +18,20 @@ keymap:
     remap:
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
   - mode: vim_insert
     remap:
       macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
       Esc: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
   - mode: vim_normal
     remap:
       macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
       # Insert
       i: [{set_mode: vim_insert}, {launch: ["bash", "-c", "notify-send '[INSERT]'"]}]
       shift-a: [End, {set_mode: vim_insert}, {launch: ["bash", "-c", "notify-send '[INSERT]'"]}]
@@ -65,6 +68,7 @@ keymap:
       macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
       # Chars
       C-f: {with_mark: Right}
       C-b: {with_mark: Left}
@@ -95,3 +99,29 @@ keymap:
           h: [C-a, {set_mark: true}]
           C-c: C-q
           C-s: C-s
+  - mode: macos
+    remap:
+      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
+      Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
+      Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
+      # Cursor Movement
+      C-Left: Home
+      C-Right: End
+      C-a: Home
+      C-e: End
+      C-b: Left
+      C-f: Right
+      C-p: Up
+      C-n: Down
+      # Word Movement
+      M-b: Alt-Left
+      M-f: Alt-Right
+      # Selection
+      Super-a: Ctrl-a
+      # Clipboard
+      Super-c: Copy
+      Super-x: Cut
+      Super-v: Paste
+      Super-z: Undo
+      Super-Shift-z: Redo
