@@ -356,7 +356,9 @@
   :ensure t
   :mode (("\\.ex\\'" . elixir-ts-mode)
          ("\\.exs\\'" . elixir-ts-mode)
-         ("\\mix.lock\\'" . elixir-ts-mode)))
+         ("\\mix.lock\\'" . elixir-ts-mode))
+  :config
+  (if (not (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.so")) (elixir-ts-install-grammar)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
