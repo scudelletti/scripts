@@ -234,38 +234,50 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Copy and Paste Tricks for OSX                                    ;;
+;; Copy and Paste OS integration                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun isolate-kill-ring()
-  "Isolate Emacs kill ring from macOS system pasteboard."
+(defun isolate-kill-ring ()
   (interactive)
   (setq interprogram-cut-function nil)
   (setq interprogram-paste-function nil))
 
-(defun pasteboard-copy()
-  "Copy region to macOS system pasteboard."
+(defvar pasteboard-copy-cmd (cond
+  ((executable-find "pbcopy") "pbcopy")
+   ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -i")))
+
+(defvar pasteboard-paste-cmd (cond
+  ((executable-find "pbcopy") "pbcopy")
+  ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -p")))
+
+(defun pasteboard-copy ()
   (interactive)
   (shell-command-on-region
-   (region-beginning) (region-end) "pbcopy"))
+   (region-beginning) (region-end) pasteboard-copy-cmd))
 
-(defun pasteboard-paste()
-  "Paste from macOS system pasteboard."
+(defun pasteboard-paste ()
   (interactive)
-  (insert (shell-command-to-string "pbpaste")))
+  (shell-command-on-region
+   (point) (if mark-active (mark) (point)) pasteboard-paste-cmd nil t))
 
-(defun pasteboard-cut()
-  "Cut region and put on macOS system pasteboard."
+(defun pasteboard-cut ()
   (interactive)
   (pasteboard-copy)
   (delete-region (region-beginning) (region-end)))
 
+;; Define Keybindings
 (if window-system
     (progn
       (isolate-kill-ring)
       (global-set-key (kbd "s-c") 'pasteboard-copy)
       (global-set-key (kbd "s-v") 'pasteboard-paste)
-      (global-set-key (kbd "s-x") 'pasteboard-cut)))
+      (global-set-key (kbd "s-x") 'pasteboard-cut))
+    (progn
+      (isolate-kill-ring)
+      (global-set-key (kbd "C-c c") 'pasteboard-copy)
+      (global-set-key (kbd "C-c v") 'pasteboard-paste)
+      (global-set-key (kbd "C-c x") 'pasteboard-cut))
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
