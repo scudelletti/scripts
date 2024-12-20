@@ -114,9 +114,11 @@ keymap:
       C-f: Right
       C-p: Up
       C-n: Down
+      Ctrl-d: Delete
       # Word Movement
       M-b: Alt-Left
       M-f: Alt-Right
+      M-d: Ctrl-Delete
       # Selection
       Super-a: Ctrl-a
       # Clipboard
@@ -127,6 +129,9 @@ keymap:
       Super-Shift-z: Redo
       # Extra
       Super-f: Ctrl-f
+      Super-n: Ctrl-n
+      Super-w: Ctrl-w
+      Super-d: Ctrl-d
       Ctrl-k: [Shift-End, Delete, {set_mark: false}]
       M-Backspace: Ctrl-Backspace
 
