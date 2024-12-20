@@ -127,6 +127,9 @@ keymap:
       Super-v: Paste
       Super-z: Undo
       Super-Shift-z: Redo
+      # Tabs
+      Super-Shift-RIGHTBRACE: Ctrl-Tab
+      Super-Shift-LEFTBRACE: Ctrl-Shift-Tab
       # Extra
       Super-f: Ctrl-f
       Super-n: Ctrl-n
