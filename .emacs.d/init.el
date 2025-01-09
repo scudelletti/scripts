@@ -306,7 +306,7 @@
 
 ;; Configure ds-run for major modes
 (setq ds-run-settings `(
-  (ruby-mode . ,ds-run-ruby-settings)
+  (ruby-ts-mode . ,ds-run-ruby-settings)
   (elixir-ts-mode . ,ds-run-elixir-settings)))
 
 
@@ -390,6 +390,17 @@
          (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.so")
          (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.dylib")))
       (elixir-ts-install-grammar)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ruby TreeSitter Mode                                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package ruby-ts-mode
+  :ensure nil ;; built-in
+  :init
+  (add-to-list 'major-mode-remap-alist
+    '(ruby-mode . ruby-ts-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
