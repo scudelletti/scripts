@@ -370,7 +370,11 @@
          ("\\.exs\\'" . elixir-ts-mode)
          ("\\mix.lock\\'" . elixir-ts-mode))
   :config
-  (if (not (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.so")) (elixir-ts-install-grammar)))
+  (if (not
+       (or
+         (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.so")
+         (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.dylib")))
+      (elixir-ts-install-grammar)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
