@@ -15,122 +15,24 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Copy and Paste Tricks for OSX                                    ;;
+;; straight.el                                                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun isolate-kill-ring()
-  "Isolate Emacs kill ring from OS X system pasteboard.
-This function is only necessary in window system."
-  (interactive)
-  (setq interprogram-cut-function nil)
-  (setq interprogram-paste-function nil))
-
-(defvar pasteboard-copy-cmd (cond
-  ((executable-find "pbcopy") "pbcopy")
-   ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -i")))
-
-(defvar pasteboard-paste-cmd (cond
-  ((executable-find "pbcopy") "pbcopy")
-  ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -p")))
-
-(defun pasteboard-copy()
-  "Copy region to OS X system pasteboard."
-  (interactive)
-  (shell-command-on-region
-   (region-beginning) (region-end) pasteboard-copy-cmd))
-
-(defun pasteboard-paste()
-  "Paste from OS X system pasteboard via `pbpaste' to point."
-  (interactive)
-  (shell-command-on-region
-   (point) (if mark-active (mark) (point)) pasteboard-paste-cmd nil t))
-
-(defun pasteboard-cut()
-  "Cut region and put on OS X system pasteboard."
-  (interactive)
-  (pasteboard-copy)
-  (delete-region (region-beginning) (region-end)))
-
-;; Define Keybindings
-(if window-system
-    (progn
-      (isolate-kill-ring)
-      ;; bind CMD+C to pasteboard-copy
-      (global-set-key (kbd "s-c") 'pasteboard-copy)
-      ;; bind CMD+V to pasteboard-paste
-      (global-set-key (kbd "s-v") 'pasteboard-paste)
-      ;; bind CMD+X to pasteboard-cut
-      (global-set-key (kbd "s-x") 'pasteboard-cut))
-
-    ;; you might also want to assign some keybindings for non-windowc
-    ;; system usage (i.e., in your text terminal, where the
-    ;; command->super does not work)
-    (progn
-      (isolate-kill-ring)
-      ;; bind CMD+C to pasteboard-copy
-      (global-set-key (kbd "C-c c") 'pasteboard-copy)
-      ;; bind CMD+V to pasteboard-paste
-      (global-set-key (kbd "C-c v") 'pasteboard-paste)
-      ;; bind CMD+X to pasteboard-cut
-      (global-set-key (kbd "C-c x") 'pasteboard-cut))
-  )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Install Packages                                                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-(defvar my-packages '(
-  ag
-  anzu
-  browse-kill-ring
-  company
-  elixir-mode
-  enh-ruby-mode
-  evil
-  exec-path-from-shell
-  flx-ido
-  flycheck
-  helm-ag
-  ido-vertical-mode
-  json-mode
-  lsp-haskell
-  lsp-mode
-  lsp-ui
-  magit
-  moe-theme
-  monokai-theme
-  multiple-cursors
-  phi-search
-  polymode
-  projectile
-  rainbow-delimiters
-  rspec-mode
-  rust-mode
-  sass-mode
-  undo-tree
-  web-mode
-  wgrep
-  wgrep-ag
-  which-key
-  yaml-mode
-  yasnippet
-  zoom-window))
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Load Env Variables                                               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -155,21 +57,121 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Disable *Messages* Buffer                                        ;;
+;; Disable Dialog Box                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;(setq-default message-log-max nil)
+(setq use-dialog-box nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Disable *Completion* Buffer                                      ;;
+;; Improve Garbage Collector                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'minibuffer-exit-hook
-  '(lambda ()
-    (let ((buffer "*Completions*"))
-    (and (get-buffer buffer)
-      (kill-buffer buffer)))))
+(setq gc-cons-threshold 20000000)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Disable background shortcut when using Non-Terminal session      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(if (display-graphic-p)
+  (global-set-key (kbd "C-z") nil))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; UTF-8 Configuration                                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(setenv "LANG" "en_US.UTF-8")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Tabs as Spaces                                                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq-default indent-tabs-mode nil)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Make all "yes or no" prompts show "y or n" instead               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Enable Mouse under xterm                                         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(xterm-mouse-mode)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Remove Tool-Bar                                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(tool-bar-mode -99)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Remove Menu-Bar                                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(menu-bar-mode -1)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Remove Start-Up Screen                                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq inhibit-splash-screen t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Line Numbers                                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-display-line-numbers-mode t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Add Column Number on Mode Line                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq column-number-mode t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Highlight Line                                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-hl-line-mode t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Highlight Parenthesis                                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Confirm Emacs Exit                                               ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq confirm-kill-emacs 'y-or-n-p)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Keybindings                                                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-set-key (kbd "C-x p") 'previous-buffer)
+(global-set-key (kbd "C-x n") 'next-buffer)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -177,15 +179,11 @@ This function is only necessary in window system."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defvar emacs-backup-directory-path "~/.emacs_backups/")
+(setq backup-directory-alist `((".*" . ,emacs-backup-directory-path)))
+(setq auto-save-file-name-transforms `((".*" ,emacs-backup-directory-path t)))
+(unless (file-directory-p emacs-backup-directory-path)
+  (make-directory emacs-backup-directory-path))
 
-(setq backup-directory-alist
-      `((".*" . ,emacs-backup-directory-path)))
-(setq auto-save-file-name-transforms
-      `((".*" ,emacs-backup-directory-path t)))
-
-(or
- (file-directory-p emacs-backup-directory-path)
- (make-directory emacs-backup-directory-path))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Define Emacs socket name based on environment variable        ;;
@@ -218,34 +216,14 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Disable Dialog Box                                               ;;
+;; Load Env Variables                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq use-dialog-box nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; UTF-8 Configuration                                              ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(setenv "LANG" "en_US.UTF-8")
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Make all "yes or no" prompts show "y or n" instead               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(fset 'yes-or-no-p 'y-or-n-p)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Line Numbers                                                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-display-line-numbers-mode t)
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -256,114 +234,59 @@ This function is only necessary in window system."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Add Column Number on Mode Line                                  ;;
+;; Remove trailing whitespace on Save                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq column-number-mode t)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Highlight Line                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-hl-line-mode t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Highlight Parenthesis                                           ;;
+;; Copy and Paste OS integration                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(show-paren-mode 1)
-(setq show-paren-style 'parenthesis)
+(defun isolate-kill-ring ()
+  (interactive)
+  (setq interprogram-cut-function nil)
+  (setq interprogram-paste-function nil))
+
+(defvar pasteboard-copy-cmd (cond
+  ((executable-find "pbcopy") "pbcopy")
+   ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -i")))
+
+(defvar pasteboard-paste-cmd (cond
+  ((executable-find "pbcopy") "pbcopy")
+  ((executable-find "ds-clipboard.sh") "ds-clipboard.sh -p")))
+
+(defun pasteboard-copy ()
+  (interactive)
+  (shell-command-on-region
+   (region-beginning) (region-end) pasteboard-copy-cmd))
+
+(defun pasteboard-paste ()
+  (interactive)
+  (shell-command-on-region
+   (point) (if mark-active (mark) (point)) pasteboard-paste-cmd nil t))
+
+(defun pasteboard-cut ()
+  (interactive)
+  (pasteboard-copy)
+  (delete-region (region-beginning) (region-end)))
+
+;; Define Keybindings
+(if window-system
+    (progn
+      (isolate-kill-ring)
+      (global-set-key (kbd "s-c") 'pasteboard-copy)
+      (global-set-key (kbd "s-v") 'pasteboard-paste)
+      (global-set-key (kbd "s-x") 'pasteboard-cut))
+    (progn
+      (isolate-kill-ring)
+      (global-set-key (kbd "C-c c") 'pasteboard-copy)
+      (global-set-key (kbd "C-c v") 'pasteboard-paste)
+      (global-set-key (kbd "C-c x") 'pasteboard-cut))
+  )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Remove Tool-Bar                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(tool-bar-mode -99)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Remove Menu-Bar                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(menu-bar-mode -1)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; General Identation                                               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq-default indent-tabs-mode nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Adjust Deep Identation for Ruby and JS                           ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq enh-ruby-bounce-deep-indent t)
-(setq js-deep-indent-paren nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  JS Identation                                                   ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq js-mode-hook
-      (function (lambda ()
-                  (setq indent-tabs-mode nil)
-                  (setq c-indent-level 2))))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Custom Variables                                                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(grep-highlight-matches 'auto)
- '(ido-enable-flex-matching t)
- '(ido-mode 'both nil (ido))
- '(initial-frame-alist '((fullscreen . maximized)))
- '(js-indent-level 2)
- '(list-matching-lines-default-context-lines 1)
- '(magit-diff-use-overlays nil)
- '(package-selected-packages
-   '(lsp-haskell zoom-window yasnippet yaml-mode which-key wgrep-ag web-mode undo-tree sass-mode rspec-mode rainbow-delimiters projectile phi-search multiple-cursors monokai-theme moe-theme magit lsp-ui json-mode ido-vertical-mode helm-ag flycheck flx-ido exec-path-from-shell enh-ruby-mode elixir-mode company cider browse-kill-ring anzu ag))
- '(ruby-align-to-stmt-keywords t)
- '(scroll-bar-mode nil)
- '(show-paren-mode t)
- '(standard-indent 2)
- '(tool-bar-mode nil))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Decode Keys for iTerm                                            ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define-key input-decode-map "\e[1;6D" [C-S-left])
-(define-key input-decode-map "\e[1;5C" [C-S-right])
-(define-key input-decode-map "\e[1;6A" [C-S-up])
-(define-key input-decode-map "\e[1;6B" [C-S-down])
-
-(define-key input-decode-map "\e[1;10A" [M-S-up])
-(define-key input-decode-map "\e[1;10B" [M-S-down])
-(define-key input-decode-map "\e[1;10C" [M-S-right])
-(define-key input-decode-map "\e[1;10D" [M-S-left])
-
-(define-key input-decode-map "\e[1;3A" [M-up])
-(define-key input-decode-map "\e[1;3B" [M-down])
-(define-key input-decode-map "\e[1;3C" [M-right])
-(define-key input-decode-map "\e[1;3D" [M-left])
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Packages, Personal functions and personalisation                 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Personal Functions                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -377,307 +300,209 @@ This function is only necessary in window system."
   (ds-run-var-bin . "bundle exec rspec")))
 
 ;; setup elixir for OSX
-(setq ds-run-elixir-settings-osx '(
+(setq ds-run-elixir-settings '(
   (ds-run-var-bin . "MIX_ENV=test iex -S mix do test")
   (ds-run-var-suffix ." --trace , run -e \"System.halt\"")))
 
-;; setup elixir for Linux
-(setq ds-run-elixir-settings-linux '(
-  (ds-run-var-bin . "docker-compose -f docker-compose.dev.yml exec -e MIX_ENV=test umbrella_app /bin/bash -i -c \"iex -S mix do test")
-  (ds-run-var-suffix ." --trace , run -e \"System.halt\"\"")))
-
-;; select elixir settings based on OS
-(if (equal (getenv "OS_TYPE") "linux")
-  (setq ds-run-elixir-settings ds-run-elixir-settings-linux)
-  (setq ds-run-elixir-settings ds-run-elixir-settings-osx))
-
 ;; Configure ds-run for major modes
 (setq ds-run-settings `(
-  (ruby-mode . ,ds-run-ruby-settings)
-  (elixir-mode . ,ds-run-elixir-settings)))
+  (ruby-ts-mode . ,ds-run-ruby-settings)
+  (elixir-ts-mode . ,ds-run-elixir-settings)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; LSP-Mode - Configuration                                         ;;
+;; Theme: Monokai                                                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq lsp-keymap-prefix "C-c C-y")
-
-;; Elixir
-;; Disable Docs on right side
-(add-hook 'elixir-mode-hook (lambda () (lsp-ui-doc-mode -1)))
-
-;; Disable Lens
-(setq lsp-lens-enable nil)
-
-;; Disable Flyckeck errors on right side
-(add-hook 'elixir-mode-hook (lambda () (lsp-ui-sideline-mode -1)))
-
-(add-hook 'elixir-mode-hook #'lsp)
-
-;; Enable Which-Key integration
-(with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
-
-;; Haskell
-(setq lsp-haskell-server-path
-      "~/bin/transient/haskell-language-server-macOS-8.6.4")
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'haskell-literate-mode-hook #'lsp)
-
-;; Rust
-(add-hook 'rust-mode-hook #'lsp)
+; (use-package monokai-theme
+;   :ensure t
+;   :config
+;   (load-theme 'monokai t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Themes                                                           ;;
+;; Theme: Catppuccin                                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(ds-switch-theme "monokai")
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Align Regexp Using Spaces                                        ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defadvice align-regexp (around align-regexp-with-spaces activate)
-  (let ((indent-tabs-mode nil))
-    ad-do-it))
+(use-package catppuccin-theme
+  :ensure t
+  :init
+  (setq catppuccin-flavor 'mocha)
+  :config
+  (load-theme 'catppuccin t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wgrep - Edit Ack-Mode                                            ;;
+;; Packages without custom config                                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'wgrep)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Anzu - Show Number of Ocurrences in a Search in the Mode-Line    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-anzu-mode +1)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Multiple Cursors                                                 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-;; Mark previous line
-(global-set-key (kbd "C-S-<up>") 'mc/mark-previous-lines)
-;; Mark next line
-(global-set-key (kbd "C-S-<down>") 'mc/mark-next-lines)
-;; Mark Next Like This
-(global-set-key (kbd "M-S-<down>") 'mc/mark-next-like-this)
-;; Mark Previous Like This
-(global-set-key (kbd "M-S-<up>") 'mc/mark-previous-like-this)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Remove trailing whitespace on Save                               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq try-format-buffer
-      (lambda () (ignore-errors (lsp-format-buffer))))
-
-(add-hook 'before-save-hook try-format-buffer)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Improve Garbage Collector                                        ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq gc-cons-threshold 20000000)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; IDO and FLX-IDO                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'flx-ido)
-(flx-ido-mode 1)
-
-(require 'ido-vertical-mode)
-(ido-mode 1)
-(ido-vertical-mode 1)
-(ido-everywhere 1)
-
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
+(use-package multiple-cursors :ensure t)
+(use-package flycheck :ensure t)
+(use-package json-mode :ensure t)
+(use-package magit :ensure t)
+(use-package ag :ensure t)
+(use-package wgrep :ensure t)
+(use-package wgrep-ag :ensure t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile                                                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(projectile-mode +1)
-(projectile-global-mode)
-(setq projectile-enable-caching t)
-(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Web-Mode - major-mode for editing web templates                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package web-mode
+(use-package projectile
   :ensure t
-  :mode
-  (("\\.phtml\\'" . web-mode)
-   ("\\.php\\'" . web-mode)
-   ("\\.tpl\\'" . web-mode)
-   ("\\.[agj]sp\\'" . web-mode)
-   ("\\.as[cp]x\\'" . web-mode)
-   ("\\.erb\\'" . web-mode)
-   ("\\.mustache\\'" . web-mode)
-   ("\\.djhtml\\'" . web-mode)
-   ("\\.eex\\'" . web-mode)
-   ("\\.heex\\'" . web-mode)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Polymode - support for multiple modes                            ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package polymode
-  :ensure t
-  :mode ("\.ex$" . poly-elixir-heex-mode)
   :config
-  (define-hostmode poly-elixir-heex-hostmode :mode 'elixir-mode)
-  (define-innermode poly-elixir-heex-expr-innermode
-    :mode 'web-mode
-    :head-matcher (rx "~H" (= 3 (char "\"'")) (* (any space)))
-    :tail-matcher (rx (= 3 (char "\"'")))
-    :head-mode 'host
-    :tail-mode 'host)
-  (define-polymode poly-elixir-heex-mode
-    :hostmode 'poly-elixir-heex-hostmode
-    :innermodes '(poly-elixir-heex-expr-innermode)))
+  (projectile-mode +1)
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+  :bind
+  (("C-c C-p" . projectile-command-map)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Undo Tree                                                        ;;
+;; Treesit                                                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'undo-tree)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HideShow Minor Mode - Activate for all languages                 ;;
-;;                                                                  ;;
-;; HideShow hides and shows blocks of text                          ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+(setq treesit-language-source-alist
+   '((yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml" "master" "src")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HideShow Configuration for Ruby                                  ;;
+;; Treesit Fold                                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(eval-after-load "hideshow"
-  '(add-to-list 'hs-special-modes-alist
-    `(ruby-mode
-      ,(rx (or "def" "class" "do" "module" "{" "["))
-      ,(rx (or "}" "]" "end"))
-      ,(rx (or "#" "=begin"))
-      ruby-forward-sexp nil)))
+(use-package treesit-fold
+  :straight (treesit-fold :type git :host github :repo "emacs-tree-sitter/treesit-fold"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HideShow Configuration for HTML                                  ;;
+;; Tree Sitter Fold                                                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(eval-after-load "hideshow"
-  '(add-to-list 'hs-special-modes-alist
-    `(web-mode
-      "{\\|<[^/>]+?"
-      "}\\|</[^/>]*[^/]>"
-      "<!--"
-      web-mode-forward-sexp nil)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HideShow Configuration for Elixir                                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(eval-after-load "hideshow"
-  '(add-to-list 'hs-special-modes-alist
-    `(elixir-mode
-      ,(rx (or "do" "%{" "{" "["))
-      ,(rx (or "end" "}" "]"))
-      "#"
-      nil
-      nil)))
+(use-package elixir-ts-mode
+  :ensure t
+  :mode (("\\.ex\\'" . elixir-ts-mode)
+         ("\\.exs\\'" . elixir-ts-mode)
+         ("\\mix.lock\\'" . elixir-ts-mode))
+  :config
+  (if (not
+       (or
+         (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.so")
+         (file-exists-p "~/.emacs.d/tree-sitter/libtree-sitter-elixir.dylib")))
+      (elixir-ts-install-grammar)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Company-Mode                                                     ;;
+;; Ruby TreeSitter Mode                                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'after-init-hook 'global-company-mode)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Yasnippet                                                        ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'yasnippet)
-
-(setq yas-snippet-dirs
-  '("~/.emacs.d/snippets"))
-
-(yas-global-mode 1)
-(put 'dired-find-alternate-file 'disabled nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Rainbow-delimiters - Enable in most programming languages        ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Zoom Window                                                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'zoom-window)
-(global-set-key (kbd "C-x C-z") 'zoom-window-zoom)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Enable Which Key Minor Model - Help with shortcuts               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(which-key-mode)
+(use-package ruby-ts-mode
+  :ensure nil ;; built-in
+  :init
+  (add-to-list 'major-mode-remap-alist
+    '(ruby-mode . ruby-ts-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil Mode                                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'evil)
-(evil-mode 1)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Keybindings                                                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-set-key (kbd "C-x p") 'previous-buffer)
-(global-set-key (kbd "C-x n") 'next-buffer)
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Disable background shortcut when using Non-Terminal session      ;;
+;; Which Key - Remove when using Emacs 30                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(if (display-graphic-p)
-  (global-set-key (kbd "C-z") nil))
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; IDO and FLX-IDO                                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package flx-ido
+  :ensure t)
+
+(use-package ido-vertical-mode
+  :ensure t
+  :config
+  (flx-ido-mode 1)
+  (ido-mode 1)
+  (ido-vertical-mode 1)
+  (ido-everywhere 1)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Yasnippet                                                        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (yas-global-mode 1))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Rainbow-delimiters - Enable in most programming languages        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Zoom Window                                                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package zoom-window
+  :ensure t
+  :bind
+  (("C-x C-z" . zoom-window-zoom)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LSP                                                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c C-y")
+  :hook ((elixir-ts-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp
+  :config
+  ;; Disable Lens, e.g., typespec annotations
+  (setq lsp-lens-enable nil)
+  ;; Disable Sideline code actions
+  (setq lsp-ui-sideline-enable nil))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :config
+  ;; Disable hover dialogs
+  (setq lsp-ui-doc-enable nil))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(projectile flx-ido exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

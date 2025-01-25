@@ -8,5 +8,14 @@
 .emacs.d/projectile-bookmarks.eld
 .emacs.d/projectile.cache
 .emacs.d/.lsp-session-v1
+.emacs.d/straight/
+.emacs.d/tree-sitter/
+
+# MacOS
 .DS_Store
+
+# Extra
 bin/transient/
+
+# Fish Shell
+linux/config/fish/fish_variables
