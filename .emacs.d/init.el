@@ -485,17 +485,17 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
-  ;; Disable Lens
+  ;; Disable Lens, e.g., typespec annotations
   (setq lsp-lens-enable nil)
-  ;; Disable Flyckeck errors on right side
-  (lsp-ui-sideline-mode -1)
-  )
+  ;; Disable Sideline code actions
+  (setq lsp-ui-sideline-enable nil))
 
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode
   :config
-  (lsp-ui-doc-mode -1))
+  ;; Disable hover dialogs
+  (setq lsp-ui-doc-enable nil))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
