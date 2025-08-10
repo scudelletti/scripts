@@ -6,29 +6,25 @@ modmap:
       CapsLock: Ctrl_L
       Super_L: Alt_L
       Alt_L: Super_L
-  - name: Map Ctrl_R to Macro when pressed alone
-    remap:
-      Ctrl_R:
-        alone: macro
-        held: Ctrl_R
 
 default_mode: default
 keymap:
   - mode: default
     remap:
+      Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
       Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
   - mode: vim_insert
     remap:
-      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
       Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
       Esc: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
   - mode: vim_normal
     remap:
-      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
       Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
@@ -65,7 +61,7 @@ keymap:
 
   - mode: emacs
     remap:
-      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
       Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
@@ -101,7 +97,7 @@ keymap:
           C-s: C-s
   - mode: macos
     remap:
-      macro: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
+      Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
       Ctrl_R-m: [{set_mode: macos}, {launch: ["bash", "-c", "notify-send 'MacOS'"]}]
