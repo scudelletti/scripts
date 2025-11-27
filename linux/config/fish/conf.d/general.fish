@@ -9,7 +9,9 @@ set -gx EDITOR "emacs -nw"
 set -gx SHELL (which fish)
 
 # Override TERM to fix colors inside toolboxes
-set -gx TERM xterm-direct
+if test -n "$CONTAINER_ID"
+  set -gx TERM xterm-direct
+end
 
 # Disable greeting message
 set fish_greeting
