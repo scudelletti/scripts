@@ -33,9 +33,18 @@ function fish_prompt
     set -l path (set_color cyan; prompt_pwd; set_color normal)
 
     ##
-    # Hostname
+    # Hostname with Toolbox Container
     ##
-    set -l machine_name (set_color brblack; echo [(prompt_hostname)]; set_color normal)
+    function ds_hostname_with_toolbox_fn
+      set -l machine_name (set_color brblack; printf (prompt_hostname); set_color normal)
+      set -l toolbox_name (set_color brblue; printf $CONTAINER_ID; set_color normal)
+
+      if test -n "$CONTAINER_ID"
+         printf "[%s|%s]" "$toolbox_name" $machine_name
+      else
+         printf "[%s]" "$machine_name"
+      end
+    end
 
     ##
     # Status
@@ -51,7 +60,7 @@ function fish_prompt
         set_color normal
         set -e ds_status
     end
- 
+
     ##
     # User
     ##
@@ -60,6 +69,6 @@ function fish_prompt
     ##
     # Prompt
     ##
-    string join " " -- $machine_name (ds_status_fn) $vcs 
+    string join " " -- (ds_hostname_with_toolbox_fn) (ds_status_fn) $vcs
     string join " " -- $user $path '$ '
 end
