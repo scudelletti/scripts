@@ -8,5 +8,8 @@ set -gx EDITOR "emacs -nw"
 # Define SHELL Environment Variable
 set -gx SHELL (which fish)
 
+# Override TERM to fix colors inside toolboxes
+set -gx TERM xterm-direct
+
 # Disable greeting message
 set fish_greeting
