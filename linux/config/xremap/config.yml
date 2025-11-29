@@ -120,6 +120,7 @@ keymap:
       Super-c: Copy
       Super-x: Cut
       Super-v: Paste
+      Super-Shift-v: Super-Shift-v
       Super-z: Undo
       Super-Shift-z: Redo
       # Tabs
