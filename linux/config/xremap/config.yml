@@ -113,6 +113,8 @@ keymap:
       # Word Movement
       M-b: Ctrl-Left
       M-f: Ctrl-Right
+      # Undo previous when alt is pressed
+      Super-Alt-f: Super-Alt-f
       M-d: Ctrl-Delete
       # Selection
       Super-a: Ctrl-a
@@ -120,6 +122,7 @@ keymap:
       Super-c: Copy
       Super-x: Cut
       Super-v: Paste
+      # Undo previous when shift if pressed
       Super-Shift-v: Super-Shift-v
       Super-z: Undo
       Super-Shift-z: Redo
