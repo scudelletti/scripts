@@ -58,7 +58,6 @@ keymap:
       C-x: [Cut, {set_mark: false}]
       # Undo
       u: [Undo, {set_mark: false}]
-
   - mode: emacs
     remap:
       Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
@@ -96,7 +95,7 @@ keymap:
           C-c: C-q
           C-s: C-s
   - mode: macos
-    remap:
+    remap: &macos
       Ctrl_R-d: [{set_mode: default}, {launch: ["bash", "-c", "notify-send 'DISABLED'"]}]
       Ctrl_R-v: [{set_mode: vim_normal}, {launch: ["bash", "-c", "notify-send '[NORMAL]'"]}]
       Ctrl_R-e: [{set_mode: emacs}, {launch: ["bash", "-c", "notify-send 'Emacs'"]}]
@@ -112,8 +111,8 @@ keymap:
       C-n: Down
       Ctrl-d: Delete
       # Word Movement
-      M-b: Alt-Left
-      M-f: Alt-Right
+      M-b: Ctrl-Left
+      M-f: Ctrl-Right
       M-d: Ctrl-Delete
       # Selection
       Super-a: Ctrl-a
@@ -133,4 +132,11 @@ keymap:
       Super-d: Ctrl-d
       Ctrl-k: [Shift-End, Delete, {set_mark: false}]
       M-Backspace: Ctrl-Backspace
-
+  - name: Apps with MacOS like mapping
+    application:
+      only:
+        - org.mozilla.firefox
+        - sublime_text
+        - Slack
+        - org.telegram.desktop
+    remap: *macos
