@@ -108,7 +108,10 @@ keymap:
       C-b: Left
       C-f: Right
       C-p: Up
+      # Undo previous when shift is pressed
+      C-Shift-p: C-Shift-p
       C-n: Down
+      C-Shift-n: C-Shift-n
       Ctrl-d: Delete
       # Word Movement
       M-b: Ctrl-Left
@@ -134,6 +137,7 @@ keymap:
       Super-n: Ctrl-n
       Super-w: Ctrl-w
       Super-d: Ctrl-d
+      Super-p: Ctrl-p
       Ctrl-k: [Shift-End, Delete, {set_mark: false}]
       M-Backspace: Ctrl-Backspace
   - name: Apps with MacOS like mapping
