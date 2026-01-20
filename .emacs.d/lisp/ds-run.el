@@ -103,6 +103,7 @@
 (defun ds-run-command (file-and-options)
   "Run binary in specific folder with file as argument"
   (ds-run-find-or-create-window)
+  (sleep-for 0.2)
   (ds-run-clear-panel)
   (ds-run-send-keys (format "cd %s" (ds-run-path)))
   (ds-run-send-keys (format "%s %s %s" (ds-run-bin) file-and-options (ds-run-suffix))))
