@@ -13,5 +13,8 @@ if test -n "$CONTAINER_ID"
   set -gx TERM xterm-direct
 end
 
+# Set DOCKER_HOST for docker-compose
+set -gx DOCKER_HOST "unix:///run/user/1000/podman/podman.sock"
+
 # Disable greeting message
 set fish_greeting
