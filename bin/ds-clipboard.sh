@@ -8,7 +8,7 @@ while getopts ":ip" opt; do
       copyq add "$input_text"
       ;;
     p)
-      wl-paste --no-newline
+      copyq read
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
