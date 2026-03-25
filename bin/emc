@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -n "$CONTAINER_ID" ]; then
-  distrobox-host-exec emc $@
+  distrobox-host-exec /bin/bash -c "EMACS_SOCKET=${EMACS_SOCKET:-default} emc $@"
 else
   emacsclient -n -s ${EMACS_SOCKET:-default} $@ || emacs -nw $@
 fi
