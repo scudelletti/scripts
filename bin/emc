@@ -1,1 +1,7 @@
-emacsclient -n -s ${EMACS_SOCKET:-default} $@ || emacs -nw $@
+#!/bin/sh
+
+if [ -n "$CONTAINER_ID" ]; then
+  distrobox-host-exec emc $@
+else
+  emacsclient -n -s ${EMACS_SOCKET:-default} $@ || emacs -nw $@
+fi
