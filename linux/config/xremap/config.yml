@@ -145,6 +145,7 @@ keymap:
       only:
         - org.mozilla.firefox
         - sublime_text
-        - Slack
+        - slack
         - org.telegram.desktop
+        - google-chrome
     remap: *macos
